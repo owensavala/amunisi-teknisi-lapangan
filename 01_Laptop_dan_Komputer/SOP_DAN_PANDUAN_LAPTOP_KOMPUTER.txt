@@ -1,0 +1,260 @@
+================================================================================
+          SOP & PANDUAN LENGKAP: 01_LAPTOP_DAN_KOMPUTER
+================================================================================
+Lokasi Folder: D:\mus\master\Tools_Teknisi_Wajib\01_Laptop_dan_Komputer\
+
+Setiap tool di folder ini memiliki panduan detail:
+1. FUNGSI
+2. KONDISI PENGGUNAAN (Gejala di Lapangan)
+3. STEP BY STEP CARA PAKAI
+4. BATASAN & KONDISI TIDAK BISA BERJALAN (Pantangan/Penyebab Gagal)
+
+================================================================================
+1. SUBFOLDER: 01_Ujian_ANBK_TKA
+================================================================================
+File: Persiapan_Ujian_ANBK_TKA.bat
+- FUNGSI:
+  Optimasi kilat 1-klik untuk seluruh laptop peserta ujian ANBK, TKA, CBT, atau
+  Ujian Sekolah agar performa lancar dan tidak terganggu sistem background.
+- KONDISI PENGGUNAAN:
+  Dijalankan pada H-1 atau beberapa jam sebelum ujian dimulai di semua laptop klien.
+- STEP BY STEP CARA PAKAI:
+  1. Klik kanan pada "Persiapan_Ujian_ANBK_TKA.bat" -> Pilih "Run as administrator".
+  2. Script akan mengeksekusi 7 langkah optimasi otomatis:
+     - Set Power Plan ke High Performance (mencegah laptop sleep/redup saat siswa berpikir).
+     - Mematikan service Windows Update sementara (agar kuota internet lab tidak habis).
+     - Mengatur sinkronisasi waktu dan zona waktu lokal (mencegah error token login VHD).
+     - Reset kartu Wi-Fi dan driver kamera pengawas ujian.
+  3. Tekan Enter saat muncul konfirmasi [SUKSES].
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * TIDAK BISA memperbaiki webcam yang kabel fleksibelnya putus fisik di engsel LCD.
+  * TIDAK BISA mengaktifkan kamera laptop Dell jika dinonaktifkan di level BIOS
+    (Solusi: Restart laptop -> Tekan F2 masuk BIOS -> System Configuration -> Integrated Devices -> Centang Enable Camera).
+
+================================================================================
+2. SUBFOLDER: 03_Diagnostik_Hardware
+================================================================================
+A. CrystalDiskInfo (Folder Portable)
+- FUNGSI:
+  Membaca kesehatan fisik SSD dan Harddisk secara akurat berdasarkan S.M.A.R.T.
+- KONDISI PENGGUNAAN:
+  Saat laptop lambat (Disk Usage 100% di Task Manager), freeze, bunyi tik-tik,
+  atau sebelum menginstall ulang Windows (agar tidak kerja sia-sia pada disk rusak).
+- STEP BY STEP CARA PAKAI:
+  1. Masuk ke folder "CrystalDiskInfo" -> Klik 2x "DiskInfo64.exe".
+  2. Perhatikan kotak "Health Status" di kiri atas:
+     - BIRU (GOOD 100%): Drive sehat dan prima.
+     - KUNING (CAUTION): Ada Bad Sector / Reallocated Sector (Segera backup data klien!).
+     - MERAH (BAD): Drive rusak fisik parah dan akan mati total dalam waktu dekat.
+  3. Lihat "Total Host Writes" untuk melihat sisa umur TBW SSD.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * TIDAK BISA membaca drive jika kabel SATA/konektor NVMe longgar atau mati total.
+  * TIDAK BISA membaca jika casing harddisk eksternal USB murahan tidak mendukung fitur bridge S.M.A.R.T.
+
+B. Generate_Laporan_Baterai.bat
+- FUNGSI:
+  Membuat laporan resmi kesehatan baterai laptop dari kernel Windows ke file HTML di Desktop.
+- KONDISI PENGGUNAAN:
+  Saat klien mengeluh "baterai baru dicabut langsung drop", atau ingin tahu apakah
+  baterai laptop masih original atau sudah bocor parah.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat.
+  2. File "Laporan_Baterai_Laptop.html" akan dibuat di Desktop dan langsung terbuka di browser.
+  3. Bandingkan angka:
+     - DESIGN CAPACITY : Kapasitas asli pabrik saat baru.
+     - FULL CHARGE CAP : Kapasitas maksimal saat ini.
+     (Jika Full Charge kurang dari 50% Design, berarti baterai sudah bocor/aus).
+  4. Periksa CYCLE COUNT (berapa kali baterai dicas dari 0-100%).
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * TIDAK BISA dijalankan pada PC Desktop (karena PC Desktop tidak memakai baterai).
+  * Angka bisa meleset jika baterai laptop adalah baterai KW/OEM murahan yang chip logikanya dipalsukan.
+
+C. Tes_Keyboard_Offline.html
+- FUNGSI:
+  Menguji setiap tombol keyboard laptop yang mati, mencet terus (short), atau lepas.
+- KONDISI PENGGUNAAN:
+  Setelah install ulang atau saat tombol keyboard laptop mengetik sendiri tanpa disentuh.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file HTML (terbuka di browser apa pun tanpa perlu internet).
+  2. Tekan seluruh tombol keyboard satu per satu dari pojok kiri atas sampai bawah.
+  3. Tombol yang ditekan akan berubah hijau. Jika ada tombol menyala hijau sendiri
+     sebelum ditekan, berarti tombol tersebut korslet/lengket.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa mendeteksi tombol kombinasi Fn kecerahan layar pada beberapa laptop
+    yang sinyalnya murni ditangani oleh chip EC BIOS tanpa lapor ke browser.
+
+D. Tes_Layar_LCD_DeadPixel_Offline.html
+- FUNGSI:
+  Penguji panel layar LCD laptop full-screen untuk mendeteksi Dead Pixel, Stuck Pixel,
+  dan Backlight Bleeding (kebocoran cahaya di sudut layar).
+- KONDISI PENGGUNAAN:
+  Saat memeriksa laptop bekas (second) yang baru dibeli atau setelah mengganti panel LCD baru.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file HTML (terbuka di browser).
+  2. Klik tombol "MULAI UJI LAYAR PENUH".
+  3. Tekan tombol SPASI atau KLIK MOUSE untuk berganti ke 9 warna murni (Hitam, Putih, Merah, Hijau, Biru, dll).
+  4. Tekan ESC untuk keluar.
+
+E. Cek_Spek_Lengkap_Laptop.bat & Cek_Kesehatan_Storage_CMD.bat
+- FUNGSI:
+  Membaca serial number BIOS, model laptop, slot RAM, dan status ringkas fisik disk via CMD.
+- KONDISI PENGGUNAAN:
+  Saat butuh info serial number untuk klaim garansi tanpa membalik laptop fisik,
+  atau cek slot RAM kosong tanpa bongkar baut casing.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat -> Catat Serial Number, Model Motherboard, dan Slot RAM.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Pada PC rakitan tanpa motherboard bermerek, Serial Number akan bertuliskan "To be filled by O.E.M.".
+
+================================================================================
+3. SUBFOLDER: 04_Aktivasi_Resmi_MAS
+================================================================================
+A. Cek_Serial_Key_Bawaan_Laptop_BIOS.bat
+- FUNGSI:
+  Menarik Product Key Windows asli bawaan pabrik yang tertanam di chip BIOS (MSDM).
+- KONDISI PENGGUNAAN:
+  Sebelum atau sesudah install ulang laptop bermerek (ASUS, Acer, Lenovo, HP, Dell)
+  agar lisensi asli bawaan pabriknya tidak hilang dan aktif permanen.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat.
+  2. Jika ada lisensi BIOS, serial 25 digit akan langsung muncul di kotak hijau.
+  3. Salin serial tersebut dan tempel ke menu "Change product key" di Settings Windows.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Laptop yang saat beli versi kosongan (DOS/Linux) tidak memiliki lisensi di chip BIOS.
+  * PC rakitan Desktop tidak memiliki lisensi bawaan BIOS.
+
+B. MAS (Microsoft Activation Scripts)
+- FUNGSI:
+  Aktivasi permanen Windows 10/11 (HWID) dan Office (Ohook) bebas blokir antivirus Defender.
+- KONDISI PENGGUNAAN:
+  Setelah selesai instal ulang Windows atau Office di komputer klien.
+- STEP BY STEP CARA PAKAI:
+  1. Buka folder "Microsoft-Activation-Scripts-master\MAS".
+  2. Jalankan "MAS_AIO.cmd".
+  3. Pilih [1] untuk Aktivasi Windows HWID permanen seumur hidup.
+  4. Pilih [2] untuk Aktivasi Office Ohook permanen.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Wajib ada koneksi internet sebentar untuk aktivasi HWID pertama kali agar tiket
+    digital terdaftar di server resmi Microsoft.
+
+================================================================================
+4. SUBFOLDER: 08_Reset_Password_Windows
+================================================================================
+File: Pasang_Bypass_Sandi.bat & Kembalikan_Sistem_Normal.bat
+- FUNGSI:
+  Membobol PIN / Password Windows yang lupa tanpa instal ulang dan tanpa hapus data.
+- KONDISI PENGGUNAAN:
+  Saat klien lupa password login Windows dan tidak bisa masuk ke Desktop.
+- STEP BY STEP CARA PAKAI:
+  1. Colok flashdisk installer Windows, hidupkan laptop dan boot ke flashdisk installer.
+  2. Pada layar pertama instalasi ("Install Now"), tekan tombol [Shift + F10] untuk membuka CMD.
+  3. Masuk ke drive flashdisk tools ini (misal ketik `D:` atau `E:` lalu tekan Enter).
+  4. Masuk ke folder ini dan ketik: `Pasang_Bypass_Sandi.bat`, lalu Enter.
+  5. Restart laptop dan biarkan boot masuk ke Windows normal klien.
+  6. Di layar login Windows, klik ikon "Kemudahan Akses" (Ease of Access / Utilman) di kanan bawah.
+  7. Jendela Command Prompt Administrator akan terbuka! Ketik:
+     `net user NamaUser SandiBaru` (contoh: `net user Administrator 12345`).
+  8. Login menggunakan sandi baru tersebut.
+  9. Setelah masuk desktop, jalankan "Kembalikan_Sistem_Normal.bat" untuk menutup pintu darurat.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * TIDAK BISA jika partisi sistem Windows dienkripsi penuh menggunakan BitLocker aktif
+    (karena drive terkunci secara kriptografi tanpa Recovery Key 48 digit).
+
+================================================================================
+5. SUBFOLDER: 09_Penyelamat_Flashdisk
+================================================================================
+File: Pulihkan_Virus_Recycler_Base64.bat & Pulihkan_Flashdisk_Shortcut.bat
+- FUNGSI:
+  Mengembalikan data flashdisk/HDD eksternal yang diacak menjadi Base64 di RECYCLER.BIN
+  oleh virus worm CEFHelper / AvastSvc dan menghapus shortcut palsu.
+- KONDISI PENGGUNAAN:
+  Saat file di flashdisk/harddisk berubah jadi shortcut, file asli hilang, memori penuh,
+  dan ada folder RECYCLER.BIN berisi file bernama acak.
+- STEP BY STEP CARA PAKAI:
+  1. Klik kanan "Pulihkan_Virus_Recycler_Base64.bat" -> Run as administrator.
+  2. Masukkan huruf drive target (contoh: E atau F atau G).
+  3. Script akan memindahkan data dari folder tersembunyi ASCII 160 (\xa0), mendekode
+     nama file asli, dan memindahkannya ke folder "DATA_DARI_RECYCLER".
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa mengembalikan file yang sebelumnya sudah tertimpa (overwritten) data baru.
+  * Tidak bisa memulihkan file jika virusnya adalah jenis Ransomware enkripsi AES
+    (ekstensi berubah jadi .locked, .stop, dll).
+
+================================================================================
+6. SUBFOLDER: 14_Tweak_Windows_Driver
+================================================================================
+A. Perbaikan_Icon_Blank_Putih.bat
+- FUNGSI: Rebuild database IconCache & ThumbCache saat ikon desktop berubah jadi kertas putih polos.
+- CARA PAKAI: Klik 2x file bat -> Layar kedip 1 detik (Explorer restart) -> Ikon normal.
+- BATASAN: Ikon tidak akan kembali jika software aslinya memang sudah terhapus/diuninstall.
+
+B. Reset_Windows_Update_Macet.bat
+- FUNGSI: Mereset total komponen update dan menghapus cache SoftwareDistribution corrupt.
+- CARA PAKAI: Klik 2x file bat -> Tunggu hingga selesai -> Buka Settings -> Check for updates.
+- BATASAN: Gagal jika sisa kapasitas partisi C: kurang dari 5 GB.
+
+C. Kontrol_Windows_Update.bat
+- FUNGSI: Saklar ON/OFF permanen mematikan atau menyalakan kembali Windows Update.
+- CARA PAKAI: Klik 2x file bat -> Pilih [1] Matikan Permanen atau [2] Nyalakan Normal.
+
+D. Paksa_Hapus_File_Folder_Terkunci.bat
+- FUNGSI: Mengambil alih kepemilikan (Take Ownership) dan memaksa hapus file/folder bandel.
+- CARA PAKAI: Klik 2x file bat -> Drag and Drop file/folder bandel ke jendela terminal -> Tekan Enter.
+- BATASAN: TIDAK BISA jika file tersebut saat itu SEDANG DIBUKA aktif oleh aplikasi latar belakang
+  (Solusi: Masuk Safe Mode dulu, baru jalankan tool ini).
+
+E. Bypass_Syarat_Windows_11_TPM_CPU.bat
+- FUNGSI: Bypass TPM 2.0, Secure Boot, RAM, dan batasan CPU prosesor jadul saat instal Windows 11.
+- CARA PAKAI: Saat muncul layar "This PC can't run Windows 11", tekan Shift + F10 -> Jalankan file bat ini -> Klik Back -> Klik Next lagi.
+- BATASAN: TIDAK BISA pada komputer arsitektur 32-bit (Windows 11 wajib 64-bit).
+
+F. Backup_Semua_Driver_Laptop.bat & Restore_Driver_Laptop.bat
+- FUNGSI: Menyedot seluruh driver laptop ke folder sebelum instal ulang, dan memasangnya kembali otomatis.
+- CARA PAKAI: Jalankan Backup sebelum instal ulang -> Simpan folder driver di flashdisk -> Jalankan Restore di Windows baru.
+- BATASAN: Driver tidak bisa dipasang jika OS lama 32-bit sedangkan OS baru 64-bit.
+
+G. Reset_Koneksi_Internet_Laptop.bat
+- FUNGSI: Reset Winsock, TCP/IP stack, dan Flush DNS untuk mengatasi "No Internet, Secured".
+- CARA PAKAI: Klik 2x file bat -> Ikuti langkah sampai selesai -> Restart laptop.
+
+H. Perbaikan_Audio_Suara.bat
+- FUNGSI: Reset layanan audio saat speaker taskbar bertanda silang merah ("No Audio Device").
+- CARA PAKAI: Klik 2x file bat -> Layanan audio akan direfresh seketika.
+- BATASAN: Tidak bisa memperbaiki speaker fisik yang membrannya sobek atau IC Audio terbakar.
+
+I. Masuk_Safe_Mode.bat & Keluar_Safe_Mode.bat
+- FUNGSI: 1-klik memaksa Windows masuk Safe Mode atau kembali ke Normal tanpa tombol F8.
+- CARA PAKAI: Klik 2x Masuk_Safe_Mode -> Restart laptop -> Bersihkan virus -> Klik 2x Keluar_Safe_Mode -> Restart.
+
+================================================================================
+7. SUBFOLDER: 10_Antivirus_Darurat_dan_Disinfeksi
+================================================================================
+A. Fix_Asosiasi_File_EXE_Rusak.bat & .reg
+- FUNGSI:
+  Memperbaiki registri "exefile" Windows agar file .EXE bisa diklik kembali normal.
+- KONDISI PENGGUNAAN:
+  Saat komputer terinfeksi Expiro/Sality dan seluruh aplikasi .exe tidak bisa dibuka
+  (muncul "Open With...", Notepad, atau error 0xc0000005).
+- CARA PAKAI: Klik kanan file .reg -> Merge -> Yes, atau jalankan file .bat.
+
+B. Buka_Blokir_TaskManager_Regedit_CMD.bat
+- FUNGSI:
+  Membuka blokir Task Manager, Registry Editor, CMD, dan menampilkan Folder Options.
+- KONDISI PENGGUNAAN:
+  Saat muncul pesan "Task Manager has been disabled by your administrator".
+- CARA PAKAI: Klik 2x file bat.
+
+C. Bersihkan_Spam_Notifikasi_Browser.bat
+- FUNGSI:
+  Membersihkan izin notifikasi situs jahat di Chrome & Edge yang memunculkan pop-up
+  iklan palsu / judi / pornografi di tray pojok kanan bawah desktop.
+- KONDISI PENGGUNAAN:
+  Saat di desktop klien sering muncul notifikasi pop-up "McAfee has expired!", dll.
+- CARA PAKAI: Klik 2x file bat. Bookmark & akun Google klien AMAN tidak terhapus.
+
+D. Kaspersky Virus Removal Tool (KVRT Portable) & AdwCleaner.exe
+- FUNGSI:
+  Scanner portabel untuk disinfeksi (membersihkan virus dari dalam file .exe tanpa menghapus file aslinya).
+- KONDISI PENGGUNAAN:
+  Pembersihan mendalam saat laptop terkena virus injeksi Expiro, Sality, atau Trojan.
+================================================================================

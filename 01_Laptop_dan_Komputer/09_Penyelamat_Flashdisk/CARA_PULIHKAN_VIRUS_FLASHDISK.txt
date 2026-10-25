@@ -1,0 +1,27 @@
+================================================================================
+          PANDUAN PEMULIHAN VIRUS FLASHDISK & RECYCLER BASE64
+================================================================================
+File di folder ini:
+1. Pulihkan_Virus_Recycler_Base64.bat (dan recover_core.py)
+2. Pulihkan_Flashdisk_Shortcut.bat
+
+KONDISI DIGUNAKAN:
+- Kasus A (Virus Shortcut Biasa): Seluruh folder berubah jadi shortcut (.lnk) tapi kapasitas masih terisi.
+  Gunakan: "Pulihkan_Flashdisk_Shortcut.bat".
+- Kasus B (Virus Canggih Recycler Base64 / Worm CEFHelper): File disembunyikan di folder
+  khusus ASCII 160 (\xa0), file diacak namanya menjadi Base64 di RECYCLER.BIN.
+  Gunakan: "Pulihkan_Virus_Recycler_Base64.bat".
+
+LANGKAH STEP BY STEP KASUS B:
+1. Klik kanan pada "Pulihkan_Virus_Recycler_Base64.bat" -> Run as administrator.
+2. Masukkan huruf drive flashdisk/HDD eksternal (contoh: E atau F atau G).
+3. Script otomatis:
+   - Mengeluarkan file dari folder tersembunyi \xa0.
+   - Mendekode nama file Base64 asli di folder RECYCLER.BIN dan memindahkannya ke "DATA_DARI_RECYCLER".
+   - Menghapus virus CEFHelper.exe, wsc.dll, AvastAuth.dat, dan ribuan shortcut dummy.
+4. Buka flashdisk Anda, seluruh data kembali normal di folder "DATA_DARI_RECYCLER"!
+
+BATASAN & KONDISI GAGAL:
+- Tidak bisa memulihkan file jika sudah tertimpa (overwritten) data baru.
+- Tidak bisa memulihkan file yang terkena Ransomware enkripsi AES (file berekstensi .locked, .stop, dll).
+================================================================================

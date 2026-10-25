@@ -1,0 +1,156 @@
+================================================================================
+             PANDUAN MASTER AMUNISI TEKNISI LAPANGAN LENGKAP
+               (Folder: D:\mus\master\Tools_Teknisi_Wajib)
+================================================================================
+
+* DOKUMEN SOP UTAMA LAPANGAN:
+  Buka file: "SOP_DAN_CATATAN_LENGKAP_SEMUA_TOOLS.txt"
+  Berisi dokumentasi mendalam setiap tool:
+  - FUNGSI: Untuk apa tool ini dibuat.
+  - KONDISI PENGGUNAAN: Gejala spesifik klien saat tool ini dipakai.
+  - STEP BY STEP: Cara pakai dari klik pertama sampai beres.
+  - BATASAN & KONDISI GAGAL: Hal yang membuat tool TIDAK BISA berjalan (pantangan).
+
+Seluruh alat teknisi telah dirapikan menjadi 5 KATEGORI UTAMA:
+1. 01_Laptop_dan_Komputer
+2. 02_Printer
+3. 03_Jaringan
+4. 04_Android
+5. 05_iPhone
+
+================================================================================
+KATEGORI 1: [01_Laptop_dan_Komputer]
+================================================================================
+A. 01_Ujian_ANBK_TKA:
+   - Persiapan_Ujian_ANBK_TKA.bat : Optimasi lab, matikan update, cegah sleep, reset Wi-Fi & kamera.
+B. 02_Software_Standar:
+   - 7z-x64-installer.exe : Installer ekstrak file wajib pasca instal ulang.
+C. 03_Diagnostik_Hardware:
+   - CrystalDiskInfo (Portable) : Standar industri cek Bad Sector HDD & kesehatan persentase TBW SSD.
+   - Cek_Kesehatan_Storage_CMD.bat : Cek tipe SSD/HDD dan status failure predict S.M.A.R.T. instan via CMD.
+   - Generate_Laporan_Baterai.bat : Laporan HTML resmi baterai (Design Capacity vs Full Charge & Cycle Count).
+   - Cek_Spek_Lengkap_Laptop.bat : Baca BIOS serial number, model laptop, slot RAM & CPU.
+   - Tes_Keyboard_Offline.html : Uji tombol keyboard rusak/normal tanpa internet di browser.
+   - BatteryInfoView & HWMonitor : Cek wear level baterai dan suhu CPU/VGA laptop overheat.
+D. 04_Aktivasi_Resmi_MAS:
+   - Cek_Serial_Key_Bawaan_Laptop_BIOS.bat : Tarik Product Key Windows asli bawaan pabrik dari chip BIOS (MSDM).
+   - MAS_AIO.cmd : Aktivasi permanen seumur hidup Windows 10/11 & Office bebas virus Defender.
+E. 05_Bootable_Ventoy:
+   - ventoy-1.1.18 : Pembuat flashdisk multi-boot ISO MBR & GPT tanpa format ulang.
+F. 06_Runtimes_AIO:
+   - VisualCppRedist_AIO_x86_x64.exe : Cegah error missing dll (MSVCP140.dll) pasca instal ulang.
+G. 07_Fix_Microsoft_Family:
+   - Bypass_Microsoft_Family.bat : Buka blokir Chrome & sistem yang terkunci akun keluarga siswa.
+H. 08_Reset_Password_Windows:
+   - Pasang_Bypass_Sandi.bat & Kembalikan_Sistem_Normal.bat : Bobol password Windows tanpa DLC Boot.
+I. 09_Penyelamat_Flashdisk:
+   - Pulihkan_Flashdisk_Shortcut.bat : Pulihkan file disembunyikan virus shortcut biasa.
+   - Pulihkan_Virus_Recycler_Base64.bat : Kembalikan file yang diacak kode Base64 di RECYCLER.BIN.
+J. 11_Backup_Data_Klien:
+   - Backup_Data_Cepat.bat : Salin cepat Desktop, Dokumen, Download, Gambar via Robocopy.
+K. 12_Keamanan_Lab_USB & 15_Keamanan_USB_Ujian:
+   - Blokir_AutoRun_USB.bat : Matikan AutoRun agar virus flashdisk tidak menular di lab.
+   - Kunci_Port_USB.bat & Buka_Kunci_USB_Normal.bat : Kunci USB Write-Protect agar soal ujian tidak bocor.
+L. 14_Tweak_Windows_Driver:
+   - Perbaikan_Icon_Blank_Putih.bat : Rebuild cache ikon desktop yang berubah jadi kertas putih polos.
+   - Reset_Windows_Update_Macet.bat : Reset total komponen update, bersihkan SoftwareDistribution corrupt.
+   - Kontrol_Windows_Update.bat : Menu on/off permanen Windows Update (cegah habis kuota & restart saat ujian).
+   - Pembersih_Sampah_Windows_Temp.bat : Deep clean file temp, prefetch, crash dump untuk meluaskan SSD.
+   - Paksa_Hapus_File_Folder_Terkunci.bat : Take ownership & paksa hapus file/folder bandel "Access Denied".
+   - Reset_Koneksi_Internet_Laptop.bat : Reset Winsock & TCP/IP stack (solusi "No Internet, Secured").
+   - Bypass_Syarat_Windows_11_TPM_CPU.bat : Bypass TPM 2.0, Secure Boot, CPU saat instal Windows 11 di PC tua.
+   - Backup_Semua_Driver_Laptop.bat & Restore_Driver_Laptop.bat : Sedot & pasang driver offline.
+   - Perbaikan_Audio_Suara.bat : Reset layanan audio saat speaker silang merah.
+   - Perbaikan_Windows_Rusak_SFC_DISM.bat : Scan & repair file sistem Windows korup otomatis.
+   - Optimasi_Performa_Maksimal.bat : Power plan Ultimate Performance, matikan animasi berat & telemetri.
+   - Masuk_Safe_Mode.bat & Keluar_Safe_Mode.bat : 1-klik masuk & keluar Safe Mode Windows.
+   - Restart_Explorer_Desktop.bat : Refresh taskbar & desktop seketika jika antarmuka hang.
+   - Tampilkan_Ikon_Desktop.bat : Munculkan This PC, User, Control Panel di desktop dalam 1 detik.
+
+================================================================================
+KATEGORI 2: [02_Printer]
+================================================================================
+1. Fix_Sharing_Printer_0x0000011b.bat:
+   - Solusi 1-klik untuk mengatasi laptop kantor/lab yang gagal menyambung ke
+     printer sharing jaringan akibat error 0x0000011b, 0x00000709, atau 0x0000007c.
+2. Perbaikan_Printer_Offline.bat:
+   - Memaksa printer yang berstatus "Offline" menjadi "Online" serta mematikan
+     antrian paused dan bug status SNMP printer jaringan.
+3. Reset_Print_Spooler.bat:
+   - Mengatasi printer macet / dokumen pending yang tidak bisa dihapus tanpa perlu restart laptop.
+4. Kirim_Halaman_Tes_Cetak.bat:
+   - Mengirim sinyal cetak Windows Test Page resmi langsung dari command prompt untuk uji koneksi.
+5. Bersihkan_Driver_Printer_Lama.bat:
+   - Membuka manajemen driver printui untuk menghapus paket driver corrupt penyebab spooler crash.
+6. Cetak_Tes_Warna_Nozzle.html:
+   - Halaman tes cetak visual 4 warna utama (Black, Cyan, Magenta, Yellow) dan garis kerapatan head.
+7. PANDUAN_RESET_DAN_SERVIS_PRINTER.txt:
+   - Panduan lengkap cara reset bantalan tinta (Waste Ink Pad) Epson via AdjProg,
+     trik tombol 5x Canon Service Mode (error 5B00), dan arti kode kedip lampu (blinking).
+
+================================================================================
+KATEGORI 3: [03_Jaringan]
+================================================================================
+1. Atur_IP_Address_Static_DHCP.bat:
+   - Pengatur cepat IP Static (Server ANBK 192.168.0.200 / Klien 192.168.0.x / Custom)
+     dan 1-klik kembali ke mode DHCP Otomatis bawaan pabrik.
+2. Lihat_Semua_Password_Wifi.bat:
+   - Memunculkan seluruh nama Wi-Fi dan kata sandi asli yang tersimpan di laptop dengan 1 klik.
+3. Scan_IP_Komputer_Lab.bat:
+   - Memindai daftar seluruh IP dan MAC address perangkat yang sedang aktif di jaringan lab.
+4. Cek_Port_Jaringan_Server.bat:
+   - Menguji apakah port aplikasi/server (80, 443, 8088 CBT, 3389 RDP, 445 SMB) Open atau Closed.
+5. Aktifkan_Network_Sharing_Folder.bat:
+   - Buka firewall Network Discovery, aktifkan FDResPub & izin SMB Guest agar PC lab bisa saling melihat.
+6. Izinkan_Ping_Masuk_Firewall.bat:
+   - Buka aturan ICMP Ping agar PC klien bisa di-ping tanpa muncul "Request timed out".
+7. Buat_Hotspot_Laptop.bat:
+   - Memancarkan sinyal Wi-Fi langsung dari laptop teknisi saat di lokasi tanpa router Wi-Fi.
+8. Tes_Koneksi_Ping_Ujian.bat:
+   - Memantau kestabilan ping ke router, internet, atau IP Server VHD lokal (deteksi RTO kabel lepas).
+9. Ganti_DNS_Cepat.bat:
+   - 1 klik ganti DNS ke Google (8.8.8.8), Cloudflare (1.1.1.1), atau kembalikan ke DHCP otomatis.
+10. Optimasi_Kecepatan_Wifi.bat:
+    - Buka throttling Windows, aktifkan TCP Window Auto-Tuning, RSS multi-core, & matikan P2P delivery.
+11. PANDUAN_LENGKAP_JARINGAN_DAN_LAB.txt:
+    - Panduan topologi resmi lab ANBK, urutan warna crimping kabel LAN T568B, dan daftar IP/sandi default router.
+
+================================================================================
+KATEGORI 4: [04_Android]
+================================================================================
+1. Menu_Servis_Android.bat:
+   - Dashboard pusat servis Android: cek status, baca info tipe/baterai, reboot recovery/fastboot/EDL,
+     reset sandi layar, buka setting, dan integrasi seluruh tools Android.
+2. Layar_HP_Mirror_Scrcpy.bat (Scrcpy Portable v5.0.1):
+   - Menampilkan dan mengendalikan layar HP secara penuh dari PC dengan mouse & keyboard.
+   - Penyelamat teknisi saat layar sentuh HP klien pecah/retak untuk menyelamatkan data.
+3. Fastboot_Toolkit.bat:
+   - Tool khusus bootloader: baca variabel hardware (getvar all), Wipe Data / Hard Reset,
+     Unlock Bootloader (UBL), dan relock bootloader.
+4. Backup_Data_HP_Kilat.bat:
+   - Menyedot otomatis galeri foto kamera (/sdcard/DCIM), WhatsApp, dan Download ke Desktop PC.
+5. Pasang_APK_Otomatis.bat:
+   - Pasang file aplikasi APK langsung via drag-and-drop tanpa copy ke memori HP.
+6. Driver_USB_Google:
+   - Pemasang driver resmi Google ADB & Fastboot (android_winusb.inf) bebas tanda seru kuning.
+7. PANDUAN_SERVIS_HP_ANDROID.txt:
+   - Panduan cara aktifkan USB Debugging di semua merk, kombinasi tombol fisik masuk mode khusus,
+     kode rahasia tes hardware (Samsung *#0*#, Xiaomi CIT, Oppo/Realme *#899#).
+
+================================================================================
+KATEGORI 5: [05_iPhone]
+================================================================================
+1. Menu_Servis_iPhone.bat:
+   - Dashboard pusat servis iOS: baca info IMEI/iOS, cek cycle count baterai asli,
+     cek status aktivasi/iCloud, keluar recovery loop, backup offline, restart & shutdown.
+2. Tarik_Crash_Log_Panic_Full.bat:
+   - Menyedot seluruh log panic full ke Desktop untuk mendeteksi sparepart rusak
+     (prs0 dock charger, mic1 flex power, tg0b baterai) pada iPhone restart tiap 3 menit.
+3. Cek_Chip_DFU_Recovery_irecovery.bat:
+   - Membaca ECID, CPID BootROM, dan model board pada iPhone mati total / mode DFU.
+4. Ambil_Screenshot_iPhone.bat:
+   - Ambil tangkapan layar iPhone langsung ke file PNG di Desktop tanpa tombol fisik.
+5. PANDUAN_SERVIS_IPHONE_DAN_PANIC_LOG.txt:
+   - Panduan diagnosa kode sensor panic full, kombinasi tombol DFU mode semua model iPhone,
+     dan cara membedakan iPhone resmi vs iPhone bypass.
+================================================================================

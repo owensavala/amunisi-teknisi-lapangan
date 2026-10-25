@@ -1,0 +1,666 @@
+================================================================================
+          BUKU PANDUAN DAN STANDAR OPERASIONAL PROSEDUR (SOP) TEKNISI
+           DOKUMENTASI LENGKAP PENGGUNAAN SELURUH TOOLS TEKNISI WAJIB
+================================================================================
+Lokasi Master Toolkit : D:\mus\master\Tools_Teknisi_Wajib\
+Format Dokumen        : Manual Teknis Lapangan (Kondisi, Step-by-Step & Batasan)
+
+================================================================================
+KATEGORI 01: [01_Laptop_dan_Komputer]
+================================================================================
+
+--------------------------------------------------------------------------------
+01. Persiapan_Ujian_ANBK_TKA.bat (Folder: 01_Ujian_ANBK_TKA)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Optimasi massal 1-klik untuk laptop/PC yang akan dipakai ujian simulasi atau
+  pelaksanaan resmi ANBK, TKA, CBT, atau Ujian Sekolah.
+- KONDISI PENGGUNAAN:
+  Dijalankan pada H-1 atau beberapa jam sebelum ujian dimulai di seluruh laptop
+  klien/peserta agar laptop tidak sleep, tidak update tiba-tiba, dan kamera/Wi-Fi aktif.
+- STEP BY STEP:
+  1. Klik kanan pada file -> Pilih "Run as administrator".
+  2. Jendela script akan memproses 7 langkah otomatis (Power plan high performance,
+     mematikan service Windows Update, sinkron jam ke server lokal, reset Wi-Fi & kamera).
+  3. Tunggu hingga muncul tulisan "[SUKSES]" dan tekan Enter untuk keluar.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa memperbaiki kamera yang rusak fisik / kabel fleksibel putus di engsel LCD.
+  * Jika laptop Dell kamera bertanda silang karena dinonaktifkan di BIOS, script
+    ini tidak bisa menembus BIOS (Wajib tekan F2 masuk BIOS -> Enable Integrated Camera).
+
+--------------------------------------------------------------------------------
+02. CrystalDiskInfo Portable (Folder: 03_Diagnostik_Hardware\CrystalDiskInfo)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membaca kesehatan fisik SSD dan Harddisk secara akurat berdasarkan S.M.A.R.T.
+- KONDISI PENGGUNAAN:
+  Saat laptop lambat (100% disk usage di Task Manager), sering freeze, bunyi tik-tik
+  pada harddisk, atau sebelum teknisi menginstall ulang Windows (agar tidak sia-sia).
+- STEP BY STEP:
+  1. Buka folder CrystalDiskInfo, klik 2x pada "DiskInfo64.exe" (atau DiskInfo32.exe).
+  2. Perhatikan kotak "Health Status" di bagian kiri atas:
+     - BIRU (GOOD 100% / Normal): Penyimpanan sehat.
+     - KUNING (CAUTION): Terdapat Bad Sector / Reallocated Sectors (Wajib backup data!).
+     - MERAH (BAD): Drive rusak parah dan akan mati total dalam waktu dekat.
+  3. Lihat "Total Host Reads/Writes" untuk melihat sisa umur pemakaian SSD.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa mendeteksi drive jika kabel SATA / NVMe longgar atau mati total (No Disk).
+  * Tidak bisa membaca info S.M.A.R.T. jika USB enclosure casing harddisk eksternal
+    murahan tidak mendukung fitur bridge passthrough S.M.A.R.T.
+
+--------------------------------------------------------------------------------
+03. Cek_Kesehatan_Storage_CMD.bat (Folder: 03_Diagnostik_Hardware)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Pengecekan status drive fisik dan prediksi kerusakan hardware via terminal CMD.
+- KONDISI PENGGUNAAN:
+  Saat teknisi butuh cek cepat tanpa membuka software GUI atau saat Windows Safe Mode.
+- STEP BY STEP:
+  1. Klik 2x pada script (otomatis meminta izin Administrator).
+  2. Baca tabel: FriendlyName, MediaType (SSD/HDD), HealthStatus, dan PredictFailure.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Hanya menampilkan status ringkas; untuk melihat jumlah bad sector spesifik tetap
+    harus memakai CrystalDiskInfo.
+
+--------------------------------------------------------------------------------
+04. Generate_Laporan_Baterai.bat (Folder: 03_Diagnostik_Hardware)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membuat laporan resmi performa baterai laptop dari kernel Windows ke file HTML di Desktop.
+- KONDISI PENGGUNAAN:
+  Saat klien mengeluh "baterai baru dicabut langsung drop", atau ingin tahu apakah
+  baterai laptop masih ori atau sudah aus (wear level tinggi).
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Script otomatis menghasilkan file "Laporan_Baterai_Laptop.html" dan membukanya di browser.
+  3. Bandingkan angka "DESIGN CAPACITY" vs "FULL CHARGE CAPACITY":
+     - Jika Full Charge kurang dari 50% Design Capacity: Baterai sudah bocor/drop.
+  4. Periksa "CYCLE COUNT" (berapa ratus kali baterai sudah dicas penuh).
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * TIDAK BISA dijalankan pada PC Desktop (karena PC Desktop tidak memiliki baterai).
+  * Tidak akurat jika baterai laptop KW/OEM murahan yang chip sensor logikanya dipalsukan.
+
+--------------------------------------------------------------------------------
+05. Tes_Keyboard_Offline.html (Folder: 03_Diagnostik_Hardware)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Menguji setiap tuts keyboard laptop yang mati, mencet terus (short/lengket), atau lepas.
+- KONDISI PENGGUNAAN:
+  Dijalankan setelah install ulang atau saat klien merasa tombol keyboard mengetik sendiri.
+- STEP BY STEP:
+  1. Klik 2x file HTML (terbuka di Chrome, Edge, atau browser apa pun tanpa butuh internet).
+  2. Tekan seluruh tombol keyboard satu per satu dari pojok kiri atas (Esc) sampai bawah.
+  3. Tombol yang ditekan akan menyala hijau. Jika ada tombol yang menyala sendiri tanpa
+     ditekan, berarti tuts tersebut korslet/lengket.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa mendeteksi tombol fungsi khusus hardware tertentu (Fn kombinasi volume
+    pada beberapa merek yang dikontrol murni oleh chip EC BIOS).
+
+--------------------------------------------------------------------------------
+06. Cek_Spek_Lengkap_Laptop.bat (Folder: 03_Diagnostik_Hardware)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membaca nomor seri BIOS laptop, model motherboard, jenis prosesor, dan slot RAM.
+- KONDISI PENGGUNAAN:
+  Saat butuh Serial Number laptop untuk klaim garansi tanpa membalik laptop fisik,
+  atau saat ingin tahu apakah ada slot RAM kosong tanpa harus membongkar casing bawah.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Catat Serial Number, Model, Jumlah keping RAM, dan Tipe Prosesor.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Pada PC rakitan tanpa motherboard bermerek resmi, Serial Number akan tertulis
+    "To be filled by O.E.M." (bawaan pabrik chip bios kosongan).
+
+--------------------------------------------------------------------------------
+07. Cek_Serial_Key_Bawaan_Laptop_BIOS.bat (Folder: 04_Aktivasi_Resmi_MAS)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Menarik Product Key Windows asli bawaan pabrik yang tertanam di chip motherboard (MSDM).
+- KONDISI PENGGUNAAN:
+  Sebelum atau sesudah install ulang laptop bermerek (ASUS, Acer, Lenovo, HP, Dell)
+  agar lisensi asli bawaan pabriknya tidak hilang dan aktif resmi selamanya.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Jika ada lisensi BIOS, serial 25 digit akan langsung muncul di kotak hijau.
+  3. Catat lisensi tersebut dan masukkan ke menu "Change product key" di Settings Windows.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Laptop yang saat beli adalah versi kosongan (DOS/FreeDOS) tidak memiliki key BIOS.
+  * PC rakitan Desktop tidak memiliki tabel MSDM BIOS.
+
+--------------------------------------------------------------------------------
+08. Pasang_Bypass_Sandi.bat & Kembalikan_Sistem_Normal.bat (08_Reset_Password_Windows)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membobol PIN / Password Windows yang lupa tanpa instal ulang dan tanpa hapus data.
+- KONDISI PENGGUNAAN:
+  Saat pemilik laptop lupa PIN / Password dan tidak bisa login ke desktop.
+- STEP BY STEP:
+  1. Colokkan flashdisk installer Windows (Ventoy/installer), boot ke installer.
+  2. Di layar pertama installer ("Install Now"), tekan Shift + F10 untuk buka CMD.
+  3. Cari letak drive Windows (misal D: atau C:), lalu masuk ke flashdisk tools ini.
+  4. Jalankan "Pasang_Bypass_Sandi.bat".
+  5. Restart laptop masuk ke Windows normal klien.
+  6. Di layar login, klik ikon "Kemudahan Akses" (Ease of Access / Utilman) di pojok kanan bawah.
+  7. Jendela Command Prompt Administrator akan terbuka! Ketik: "net user NamaUser SandiBaru".
+  8. Login menggunakan sandi baru tersebut.
+  9. Setelah masuk Windows, jalankan "Kembalikan_Sistem_Normal.bat" untuk menutup pintu darurat.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * TIDAK BISA jika drive sistem Windows dienkripsi penuh menggunakan BitLocker aktif
+    (karena drive terkunci secara kriptografi tanpa Recovery Key 48 digit).
+
+--------------------------------------------------------------------------------
+09. Pulihkan_Virus_Recycler_Base64.bat (Folder: 09_Penyelamat_Flashdisk)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Memulihkan file flashdisk/harddisk yang diacak menjadi Base64 di folder RECYCLER.BIN
+  oleh virus worm CEFHelper / AvastSvc dan menghapus payload virusnya.
+- KONDISI PENGGUNAAN:
+  Saat isi flashdisk/HDD eksternal berubah jadi shortcut, file asli hilang, memori
+  terisi penuh, dan di dalam drive ada file berekstensi aneh dengan kode Base64.
+- STEP BY STEP:
+  1. Klik kanan -> Run as administrator.
+  2. Masukkan huruf drive target (misal: E atau F atau G).
+  3. Script akan memindahkan data dari folder sembunyi ASCII 160 (\xa0), mendekode
+     nama file Base64 asli, dan membersihkan sampah shortcut.
+  4. Data Anda akan kembali utuh di folder "DATA_DARI_RECYCLER".
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa mengembalikan file yang sebelumnya sudah di-overwrite / tertimpa data baru.
+  * Tidak bisa memulihkan file jika virusnya adalah jenis Ransomware enkripsi AES/RSA
+    (file berubah ekstensi menjadi .locked, .stop, dll).
+
+--------------------------------------------------------------------------------
+10. Perbaikan_Icon_Blank_Putih.bat (Folder: 14_Tweak_Windows_Driver)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membangun ulang (rebuild) database Icon Cache & Thumb Cache Windows Explorer.
+- KONDISI PENGGUNAAN:
+  Saat ikon di desktop, file explorer, atau taskbar berubah jadi kertas putih polos.
+- STEP BY STEP:
+  1. Klik 2x file bat. Layar akan berkedip 1 detik (Explorer restart otomatis).
+  2. Seluruh ikon akan kembali menampilkan gambar aslinya.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika aplikasi aslinya memang sudah di-uninstall, ikon akan tetap tidak bergambar.
+
+--------------------------------------------------------------------------------
+11. Reset_Windows_Update_Macet.bat (Folder: 14_Tweak_Windows_Driver)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mereset seluruh komponen update, menghapus cache SoftwareDistribution yang korup.
+- KONDISI PENGGUNAAN:
+  Saat Windows Update macet di 0%, download berputar tanpa henti, atau muncul error
+  (0x80070002, 0x80240034, dll).
+- STEP BY STEP:
+  1. Klik 2x file bat (Run as Admin otomatis).
+  2. Biarkan script menghentikan wuauserv, merename folder SoftwareDistribution,
+     mendaftarkan ulang DLL update, dan menyalakan kembali service.
+  3. Buka Settings -> Windows Update -> Check for updates.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa memperbaiki update jika kapasitas drive C: kurang dari 5 GB.
+  * Tidak bisa memperbaiki jika versi Windows yang diinstal adalah Windows modifikasi
+    (Lite/Ghost Spectre) yang komponen updatenya sudah dipotong permanen.
+
+--------------------------------------------------------------------------------
+12. Kontrol_Windows_Update.bat (Folder: 14_Tweak_Windows_Driver)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Saklar ON/OFF permanen untuk mematikan atau menyalakan kembali Windows Update.
+- KONDISI PENGGUNAAN:
+  Saat laptop klien kuotanya terbatas, atau komputer lab sekolah agar tidak restart
+  sendiri di tengah pelaksanaan simulasi ujian.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Pilih menu [1] untuk Matikan total, atau [2] untuk Hidupkan kembali normal.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Fitur keamanan Windows Defender Tamper Protection di edisi Windows tertentu
+    tetap bisa mendownload update antivirus definisi intelijen (Security Intelligence).
+
+--------------------------------------------------------------------------------
+13. Paksa_Hapus_File_Folder_Terkunci.bat (Folder: 14_Tweak_Windows_Driver)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mengambil alih kepemilikan (Take Ownership) dan memaksa hapus file/folder bandel.
+- KONDISI PENGGUNAAN:
+  Saat ingin menghapus file sisa virus atau aplikasi, tapi muncul peringatan:
+  "Access is denied" atau "You need permission from SYSTEM to make changes".
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Tarik dan lepas (Drag & Drop) file atau folder bandel ke jendela terminal tersebut.
+  3. Tekan Enter. File/folder akan dipaksa hapus bersih.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * TIDAK BISA menghapus file yang saat itu SEDANG DIBUKA / DIGUNAKAN aktif oleh aplikasi
+    atau driver latar belakang (Solusi: Masuk Safe Mode dulu, baru jalankan tool ini).
+  * DILARANG dipakai untuk menghapus folder inti Windows (C:\Windows) karena akan blue screen.
+
+--------------------------------------------------------------------------------
+14. Bypass_Syarat_Windows_11_TPM_CPU.bat (Folder: 14_Tweak_Windows_Driver)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Memasang kunci registri LabConfig & MoSetup untuk membypass cek TPM 2.0, Secure Boot,
+  dan batas minimal prosesor saat instal atau upgrade Windows 11.
+- KONDISI PENGGUNAAN:
+  Saat instal Windows 11 pada laptop lama (Intel Gen 2 s/d Gen 7, AMD jadul) dan muncul
+  layar error: "This PC can't run Windows 11".
+- STEP BY STEP:
+  1. Saat layar error instalasi muncul, tekan Shift + F10 untuk membuka Command Prompt.
+  2. Jalankan file bat ini dari flashdisk.
+  3. Klik tombol Back (kembali) di installer Windows 11, lalu klik Next lagi.
+  4. Instalasi Windows 11 akan langsung lolos tanpa hambatan!
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Komputer dengan arsitektur 32-bit murni (x86) tidak bisa menjalankan Windows 11
+    karena Windows 11 hanya dibuat untuk sistem 64-bit (x64).
+
+--------------------------------------------------------------------------------
+15. Backup_Semua_Driver_Laptop.bat & Restore_Driver_Laptop.bat (14_Tweak_Windows_Driver)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Menyedot seluruh driver pihak ketiga (Wi-Fi, VGA, Audio, Chipset, Touchpad) bawaan
+  laptop ke flashdisk sebelum install ulang, dan memasangnya kembali otomatis tanpa kuota.
+- KONDISI PENGGUNAAN:
+  Wajib dijalankan SETIAP KALI sebelum menginstall ulang laptop klien yang driver
+  bawaannya langka di internet.
+- STEP BY STEP:
+  1. Di Windows lama yang masih hidup, jalankan "Backup_Semua_Driver_Laptop.bat".
+  2. Seluruh driver akan diekstrak ke folder "BACKUP_DRIVER_LAPTOP" di Desktop/Flashdisk.
+  3. Install ulang Windows seperti biasa.
+  4. Di Windows baru yang masih kosongan, colok flashdisk dan jalankan "Restore_Driver_Laptop.bat".
+  5. Seluruh hardware akan langsung aktif normal tanpa butuh kuota internet.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika OS lama adalah 32-bit dan OS baru 64-bit, driver tidak cocok dan akan ditolak Windows.
+
+--------------------------------------------------------------------------------
+16. Perbaikan_Audio_Suara.bat (Folder: 14_Tweak_Windows_Driver)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mereset layanan Windows Audio dan mendeteksi ulang chip audio (PnP Rescan).
+- KONDISI PENGGUNAAN:
+  Saat ikon speaker di taskbar bertanda silang merah ("No Audio Output Device is installed")
+  padahal driver sudah ada, atau suara tiba-tiba bisu setelah bangun dari sleep.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Layanan audio akan dimatikan dan dihidupkan ulang secara berurutan.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa memperbaiki speaker fisik yang membrannya sobek atau IC Audio motherboard terbakar.
+
+--------------------------------------------------------------------------------
+17. Masuk_Safe_Mode.bat & Keluar_Safe_Mode.bat (Folder: 14_Tweak_Windows_Driver)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mengatur boot loader BCDedit untuk memaksa Windows selalu masuk Safe Mode atau Mode Normal.
+- KONDISI PENGGUNAAN:
+  Saat laptop terkena virus berat, layar berkedip, atau ingin menghapus driver corrupt
+  tanpa harus repot menekan tombol F8 / Shift berkali-kali.
+- STEP BY STEP:
+  1. Klik 2x "Masuk_Safe_Mode.bat" -> Restart laptop -> Laptop masuk Safe Mode.
+  2. Lakukan perbaikan yang diinginkan.
+  3. Klik 2x "Keluar_Safe_Mode.bat" -> Restart laptop -> Laptop kembali ke Windows normal.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika file bootloader BCD Windows sudah rusak total (error 0xc000000f), perbaikan
+    harus menggunakan bootable USB Command Prompt (bootrec /rebuildbcd).
+
+================================================================================
+KATEGORI 02: [02_Printer]
+================================================================================
+
+--------------------------------------------------------------------------------
+01. Fix_Sharing_Printer_0x0000011b.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Memperbaiki registry otentikasi RPC Windows agar printer yang dishare di jaringan
+  bisa disambungkan oleh laptop/komputer lain tanpa ditolak error 0x0000011b / 0x00000709.
+- KONDISI PENGGUNAAN:
+  Saat komputer klien kantor/lab ingin menyambung ke printer bersama, tapi muncul error:
+  "Operation failed with error 0x0000011b".
+- STEP BY STEP:
+  1. Jalankan script ini di Komputer Server (yang dicolok kabel USB printer). Pilih opsi [1] atau [3].
+  2. Jalankan script ini di Laptop Klien (yang numpang nge-print). Pilih opsi [2] atau [3].
+  3. Sambungkan kembali printer via jaringan (\\IP_SERVER).
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Komputer Server dan Klien wajib berada di dalam SATU JARINGAN LOKAL (subnet IP sama).
+  * Jika firewall pihak ketiga (seperti antivirus kaspersky/avast) memblokir port 445/139,
+    antivirus tersebut harus diizinkan secara manual.
+
+--------------------------------------------------------------------------------
+02. Perbaikan_Printer_Offline.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Memaksa antrian printer dari status "Offline" / "Paused" menjadi "Online".
+- KONDISI PENGGUNAAN:
+  Saat lampu printer menyala hijau dan kabel tercolok, tapi di Word tertulis "Offline".
+- STEP BY STEP:
+  1. Klik 2x file bat (Run as Admin).
+  2. Script akan mencari seluruh printer dan mengubah nilai WorkOffline = False.
+  3. Buka antrian cetak, status akan berubah menjadi "Ready".
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa memperbaiki jika kabel data USB printer putus di dalam atau printer mati.
+
+--------------------------------------------------------------------------------
+03. Reset_Print_Spooler.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mengosongkan folder antrian C:\Windows\System32\spool\PRINTERS dan me-restart Spooler.
+- KONDISI PENGGUNAAN:
+  Saat ada dokumen salah cetak yang macet (status "Deleting... / Printing") dan
+  tidak bisa dihapus, menyebabkan dokumen baru tidak mau keluar.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Dalam 3 detik, seluruh antrian cetak yang macet akan lenyap bersih.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak ada batasan sistem. Namun jika kertas tersangkut fisik (Paper Jam) di dalam
+    printer, kertas harus ditarik keluar manual terlebih dahulu.
+
+--------------------------------------------------------------------------------
+04. Kirim_Halaman_Tes_Cetak.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mengirim perintah cetak resmi Windows Test Page via Command Prompt ke printer tertentu.
+- KONDISI PENGGUNAAN:
+  Untuk membuktikan kepada klien bahwa koneksi laptop ke printer sudah sukses
+  tanpa harus membuka aplikasi Microsoft Word atau file dokumen pribadi.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Ketik nama printer yang ingin diuji sesuai daftar di layar, tekan Enter.
+  3. Kertas tes resmi Windows akan keluar dari printer.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Gagal jika printer kehabisan kertas, kehabisan tinta, atau tutup printer terbuka.
+
+--------------------------------------------------------------------------------
+05. Bersihkan_Driver_Printer_Lama.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membuka dialog Print Server Properties untuk mencabut paket driver printer corrupt.
+- KONDISI PENGGUNAAN:
+  Saat ingin menghapus printer bekas, tapi selalu muncul error "The printer driver
+  is currently in use", atau Spooler Windows sering crash mendadak.
+- STEP BY STEP:
+  1. Klik 2x file bat. Spooler akan direstart untuk melepaskan file lock.
+  2. Jendela "Print Server Properties" tab Driver akan terbuka otomatis.
+  3. Pilih driver yang bermasalah -> Klik "Remove" -> Pilih "Remove driver and driver package".
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika printer tersebut masih terpasang di antrian aktif, antrian printernya harus
+    dihapus terlebih dahulu di Control Panel Printers.
+
+--------------------------------------------------------------------------------
+06. Cetak_Tes_Warna_Nozzle.html
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Halaman visual tes 4 kanal warna (CMYK: Cyan, Magenta, Yellow, Black) & garis nozzle.
+- KONDISI PENGGUNAAN:
+  Saat hasil cetakan garis-garis, warna buram, atau foto keluar dengan warna salah.
+- STEP BY STEP:
+  1. Klik 2x file HTML (terbuka di browser).
+  2. Klik tombol "CETAK HALAMAN UJI SEKARANG".
+  3. Perhatikan hasil kertas yang keluar:
+     - Jika warna Magenta (merah) hilang: Head/selang warna merah masuk angin/mampet.
+     - Jika garis hitam patah-patah: Lakukan Head Cleaning.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Ini adalah alat diagnosa visual, bukan pembersih kimia. Jika head buntu total
+    akibat tinta kering berbulan-bulan, head harus disedot manual menggunakan spuit/cairan cleaner.
+
+================================================================================
+KATEGORI 03: [03_Jaringan]
+================================================================================
+
+--------------------------------------------------------------------------------
+01. Atur_IP_Address_Static_DHCP.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mengubah settingan IP Address kartu jaringan (LAN/Wi-Fi) secara kilat tanpa Control Panel.
+- KONDISI PENGGUNAAN:
+  Saat menyetel puluhan laptop peserta ANBK ke IP Static 192.168.0.x, Server VHD ke
+  192.168.0.200, atau mengembalikannya ke DHCP setelah ujian selesai.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Pilih menu:
+     [1] Kembalikan ke Otomatis (DHCP bawaan internet biasa).
+     [2] Klien Ujian ANBK/CBT (Masukkan nomor urut klien, misal 15 -> jadi 192.168.0.15).
+     [3] Server VHD Ujian ANBK (Otomatis disetel ke 192.168.0.200).
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Wajib mengetik nama kartu jaringan dengan benar (misal: "Ethernet" atau "Wi-Fi").
+  * Tidak bisa menyambung ke internet jika disetel ke IP Static Ujian tapi router di lab
+    menggunakan segmen IP berbeda (misal 192.168.1.1).
+
+--------------------------------------------------------------------------------
+02. Optimasi_Kecepatan_Wifi.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membuka batas kecepatan jaringan Windows (Disable Throttling), mengaktifkan TCP Window
+  Auto-Tuning, RSS multi-core, dan mematikan pengunggahan update diam-diam.
+- KONDISI PENGGUNAAN:
+  Saat kecepatan Wi-Fi laptop terasa lambat, streaming sering buffering, atau download
+  tidak mencapai bandwidth maksimal paket langganan.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Tunggu 6 langkah optimasi selesai dan muncul tulisan [SUKSES].
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Script ini mengoptimalkan sistem laptop, BUKAN menambah kuota atau kecepatan dari
+    ISP (IndiHome/Starlink). Jika paket internet memang 10 Mbps, tidak bisa jadi 100 Mbps.
+  * Tidak bisa menembus dinding beton tebal jika jarak fisik ke router terlalu jauh.
+
+--------------------------------------------------------------------------------
+03. Aktifkan_Network_Sharing_Folder.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mengubah profil jaringan ke Private, membuka port sharing di Firewall, dan mengaktifkan
+  service penemuan perangkat (FDResPub).
+- KONDISI PENGGUNAAN:
+  Saat laptop tidak muncul di folder "Network" di file explorer atau tidak bisa
+  membuka folder yang dishare oleh komputer guru/kantor.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Biarkan script mengaktifkan seluruh service dan rule firewall.
+  3. Buka File Explorer -> Network -> Seluruh PC di lab akan langsung terlihat.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Kedua komputer harus terhubung ke satu router/switch yang sama.
+  * Jika router disetel fitur "AP Isolation" / "Client Isolation" (biasanya di Wi-Fi kafe),
+    perangkat memang sengaja diisolasi oleh router sehingga tidak bisa saling melihat.
+
+--------------------------------------------------------------------------------
+04. Izinkan_Ping_Masuk_Firewall.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membuka izin ICMP Echo Request di Windows Firewall.
+- KONDISI PENGGUNAAN:
+  Saat laptop klien di-ping dari server selalu menjawab "Request timed out".
+- STEP BY STEP:
+  1. Klik 2x file bat -> Pilih opsi [1] Izinkan Ping.
+  2. Sekarang komputer ini bisa di-ping dari komputer lain.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika ada firewall antivirus pihak ketiga (Norton/McAfee/Kaspersky), aturan ICMP
+    harus diizinkan juga di dalam pengaturan firewall antivirus tersebut.
+
+--------------------------------------------------------------------------------
+05. Cek_Port_Jaringan_Server.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Menguji apakah port aplikasi tertentu (80 HTTP, 8088 CBT, 3389 RDP, 445 SMB) pada
+  server sedang Terbuka (Open) atau Tertutup (Closed).
+- KONDISI PENGGUNAAN:
+  Saat klien tidak bisa membuka halaman web ujian/aplikasi kantor. Teknisi dapat
+  memastikan apakah masalahnya ada di aplikasi server yang mati atau di kabel jaringan.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Masukkan IP Server target (misal: 192.168.0.200).
+  3. Tekan Enter untuk mengecek seluruh port penting sekaligus.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika server dalam kondisi mati total (Power off), semua port akan dilaporkan Tertutup.
+
+--------------------------------------------------------------------------------
+06. Lihat_Semua_Password_Wifi.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mengekstrak seluruh profil Wi-Fi beserta kata sandi asli yang pernah terhubung.
+- KONDISI PENGGUNAAN:
+  Saat guru/klien lupa kata sandi Wi-Fi kantor/sekolah padahal laptopnya sudah terhubung.
+- STEP BY STEP:
+  1. Klik 2x file bat.
+  2. Daftar nama Wi-Fi dan sandinya langsung terpampang di layar terminal.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Hanya bisa membaca password Wi-Fi yang PERNAH terhubung di laptop ini sebelumnya.
+  * Tidak bisa menebak/membobol password Wi-Fi baru milik tetangga yang belum pernah terhubung.
+
+--------------------------------------------------------------------------------
+07. Buat_Hotspot_Laptop.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Memancarkan jaringan Wi-Fi virtual langsung dari kartu wireless laptop teknisi.
+- KONDISI PENGGUNAAN:
+  Saat berada di sekolah pulau terpencil yang hanya punya kabel LAN 1 colokan, dan
+  teknisi butuh membagikan koneksi internet ke HP atau tablet tanpa router tambahan.
+- STEP BY STEP:
+  1. Klik 2x file bat -> Pilih [1] Nyalakan Hotspot.
+  2. Masukkan nama Wi-Fi dan password minimal 8 digit.
+  3. HP/Laptop lain tinggal mencari nama Wi-Fi tersebut dan menyambungkannya.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Beberapa driver kartu Wi-Fi modern (Wi-Fi 6 AX Intel) mematikan fitur HostedNetwork
+    legacy (Wajib gunakan menu Mobile Hotspot bawaan Windows Settings).
+
+================================================================================
+KATEGORI 04: [04_Android]
+================================================================================
+
+--------------------------------------------------------------------------------
+01. Layar_HP_Mirror_Scrcpy.bat (Scrcpy Portable v5.0.1)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Menampilkan layar HP Android ke monitor laptop dan mengendalikannya 100% menggunakan
+  mouse dan keyboard laptop (Resolusi penuh & 60 FPS).
+- KONDISI PENGGUNAAN:
+  Penyelamat nomor satu saat HP klien LAYAR SENTUH PECAH / MATI SENTUH, tapi mesin
+  hidup dan butuh selamatkan data WhatsApp, galeri, atau backup kontak.
+- STEP BY STEP:
+  1. Sambungkan HP ke laptop dengan kabel data USB.
+  2. Pastikan USB Debugging aktif di HP.
+  3. Klik 2x "Layar_HP_Mirror_Scrcpy.bat" -> Pilih [1] Mode Normal.
+  4. Jendela layar HP akan muncul di laptop. Gunakan klik kiri mouse untuk menyentuh
+     dan keyboard untuk mengetik sandi/chat!
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * MUTLAK BUTUH USB DEBUGGING AKTIF. Jika USB Debugging mati dan layar HP hitam pekat
+    serta terkunci sandi, Scrcpy tidak bisa menembus otentikasi RSA Android.
+  * Kabel USB harus tipe Data Cable, bukan kabel cas murah 2-kabel yang tidak ada jalur data.
+
+--------------------------------------------------------------------------------
+02. Fastboot_Toolkit.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mengontrol HP Android di level Bootloader: membaca info hardware, Unlock Bootloader (UBL),
+  dan melakukan Hard Reset (Wipe Userdata & Cache) dari PC.
+- KONDISI PENGGUNAAN:
+  Saat HP Android BOOTLOOP (mentok di logo), restart berulang-ulang, atau lupa pola
+  tapi menu recovery fisik tidak bisa dibuka karena tombol volume rusak.
+- STEP BY STEP:
+  1. Matikan HP. Tahan tombol [Power + Volume Bawah] sampai masuk layar Fastboot.
+  2. Colokkan kabel USB ke laptop.
+  3. Buka "Fastboot_Toolkit.bat" -> Pilih [1] Cek Perangkat (pastikan serial terdeteksi).
+  4. Pilih [3] Hard Reset (Ketik YAKIN untuk konfirmasi).
+  5. Pilih [7] Reboot Normal. HP akan menyala bersih seperti setelan pabrik!
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa melakukan UBL jika pabrikan HP mengunci server tokennya (seperti Huawei
+    atau beberapa seri Oppo/Vivo modern yang butuh akun otorisasi server).
+  * Hard Reset via Fastboot akan menghapus seluruh data HP (Foto, Chat, Aplikasi).
+
+--------------------------------------------------------------------------------
+03. Backup_Data_HP_Kilat.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Menyedot (pull) folder Galeri Foto/Video (/sdcard/DCIM), Media WhatsApp, dan Download
+  dari HP langsung ke folder rapi di Desktop laptop teknisi.
+- KONDISI PENGGUNAAN:
+  Sebelum melakukan reset pabrik atau servis software pada HP klien.
+- STEP BY STEP:
+  1. Colokkan HP dengan USB Debugging aktif.
+  2. Klik 2x file bat -> Ketik Y untuk konfirmasi.
+  3. Script akan menyalin seluruh folder secara otomatis dan membuka foldernya di Desktop.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Memori internal HP yang terenkripsi dan rusak fisiknya (bad NAND/eMMC) akan gagal dibaca.
+
+--------------------------------------------------------------------------------
+04. Pasang_Driver_Android_Google.bat (Folder: Driver_USB_Google)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Memasang file android_winusb.inf resmi Google ke Windows Driver Store.
+- KONDISI PENGGUNAAN:
+  Saat HP dicolokkan tapi di Device Manager muncul tanda seru kuning pada:
+  "Android", "Android Bootloader Interface", atau "ADB Interface".
+- STEP BY STEP:
+  1. Buka folder Driver_USB_Google -> Klik 2x "Pasang_Driver_Android_Google.bat".
+  2. Cabut dan colokkan kembali kabel USB HP. Tanda seru kuning akan hilang.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Khusus untuk mode EDL Qualcomm 9008 (chip mati total), membutuhkan driver khusus
+    Qualcomm QDLoader 9008, bukan driver Google ADB.
+
+================================================================================
+KATEGORI 05: [05_iPhone]
+================================================================================
+
+--------------------------------------------------------------------------------
+01. Tarik_Crash_Log_Panic_Full.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Menyedot seluruh file crash log dari memori iPhone ke Desktop untuk mendeteksi
+  sparepart rusak penyebab iPhone restart sendiri setiap 3 atau 5 menit.
+- KONDISI PENGGUNAAN:
+  Saat iPhone klien normal beberapa menit, lalu tiba-tiba mati / reboot berkala.
+- STEP BY STEP:
+  1. Nyalakan iPhone, colok kabel Lightning/Type-C ke laptop.
+  2. Klik "Trust / Percayai Komputer Ini" di layar iPhone dan masukkan PIN layar.
+  3. Klik 2x "Tarik_Crash_Log_Panic_Full.bat".
+  4. Buka folder hasil tarikan di Desktop, buka file "panic-full-....ips" pakai Notepad.
+  5. Cari kata "missing sensor":
+     - prs0       : Fleksibel lubang charger bawah rusak (Ganti Dock Charger).
+     - mic1       : Fleksibel tombol on/off & flash atas rusak (Ganti Flex Power).
+     - tg0b / tg0v: Sensor baterai rusak / konektor kendor (Ganti Baterai).
+     - AOP PANIC  : Sensor speaker depan / Face ID terkena air.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * iPhone harus bisa menyala minimal 1-2 menit untuk menekan tombol "Trust".
+  * Jika iPhone mati total (tidak bisa nyala sama sekali), panic log tidak bisa ditarik.
+
+--------------------------------------------------------------------------------
+02. Menu_Servis_iPhone.bat -> Opsi: KELUAR DARI RECOVERY MODE
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Mengirim perintah "irecovery -n" ke chip iBoot untuk membatalkan loop Recovery Mode.
+- KONDISI PENGGUNAAN:
+  Saat iPhone nyangkut di logo kabel charger / logo iTunes/komputer dan menolak masuk menu.
+- STEP BY STEP:
+  1. Colokkan iPhone yang nyangkut di layar kabel ke laptop.
+  2. Buka "Menu_Servis_iPhone.bat" -> Pilih menu [5] KELUAR DARI RECOVERY MODE.
+  3. iPhone akan langsung restart dan menyala normal kembali ke menu tanpa hilang data!
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika sistem iOS di dalam iPhone memang sudah corrupt parah atau memori NAND rusak,
+    iPhone akan tetap kembali ke recovery mode (Wajib di-flash ulang via iTunes/3uTools).
+
+--------------------------------------------------------------------------------
+03. Menu_Servis_iPhone.bat -> Opsi: CEK KESEHATAN BATERAI (CYCLE COUNT)
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membaca sensor asli com.apple.mobile.battery untuk mengetahui Cycle Count baterai.
+- KONDISI PENGGUNAAN:
+  Saat membeli iPhone second atau klien ingin tahu kesehatan baterai yang sesungguhnya
+  (karena persentase Battery Health di menu Pengaturan sering disuntik/dimanipulasi).
+- STEP BY STEP:
+  1. Colokkan iPhone (kondisi menyala dan di-Trust).
+  2. Buka Menu Servis iPhone -> Pilih menu [2] Cek Kesehatan Baterai.
+  3. Lihat angka "CycleCount" (jumlah berapa kali baterai dicas dari 0 sampai 100%).
+     - 0 - 300 kali   : Baterai masih sangat bagus (Original/Fresh).
+     - 300 - 600 kali : Baterai normal pemakaian wajar.
+     - Di atas 800x   : Baterai sudah soak/wajib diganti.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika baterai iPhone diganti baterai non-original tanpa memindahkan chip BMS ori,
+    nilai CycleCount mungkin tidak terbaca oleh sistem lockdown Apple.
+
+--------------------------------------------------------------------------------
+04. Cek_Chip_DFU_Recovery_irecovery.bat
+--------------------------------------------------------------------------------
+- FUNGSI:
+  Membaca ECID, CPID prosesor Apple, dan status mode (DFU vs Recovery) langsung dari BootROM.
+- KONDISI PENGGUNAAN:
+  Saat iPhone mati total (layar hitam) untuk memastikan apakah mesin masih hidup
+  di level chip atau motherboard mati total (short).
+- STEP BY STEP:
+  1. Colokkan iPhone ke laptop.
+  2. Klik 2x file bat. Jika terdeteksi chip Apple (CPID: 0x80xx), berarti mesin masih
+     hidup dan bisa dilakukan tindakan software/flashing.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika jalur USB lightning korslet atau jalur daya VDD_MAIN motherboard mati total,
+    chip tidak akan mendapat daya dan tidak akan terdeteksi di laptop.
+================================================================================

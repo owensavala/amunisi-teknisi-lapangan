@@ -1,0 +1,94 @@
+================================================================================
+          SOP & PANDUAN LENGKAP: 05_IPHONE
+================================================================================
+Lokasi Folder: D:\mus\master\Tools_Teknisi_Wajib\05_iPhone\
+
+Semua tool di folder ini dirancang untuk servis hardware & software iOS menggunakan
+engine standalone resmi "libimobiledevice" tanpa perlu menginstal 3uTools atau iTunes berat.
+
+CATATAN TEKNISI:
+Semua tool dijalankan dari LAPTOP. iPhone dihubungkan menggunakan kabel data Lightning / Type-C.
+
+================================================================================
+1. Tarik_Crash_Log_Panic_Full.bat
+================================================================================
+- FUNGSI:
+  Menyedot seluruh file crash log dari memori iPhone ke Desktop untuk mendeteksi
+  sparepart rusak penyebab iPhone restart sendiri setiap 3 atau 5 menit.
+- KONDISI PENGGUNAAN:
+  Saat iPhone klien normal beberapa menit, lalu tiba-tiba mati / reboot berkala
+  (sering terjadi setelah ganti LCD, ganti baterai, atau kena air).
+- STEP BY STEP CARA PAKAI:
+  1. Nyalakan iPhone, colok kabel Lightning/Type-C ke laptop.
+  2. Klik "Trust / Percayai Komputer Ini" di layar iPhone dan masukkan PIN layar.
+  3. Klik 2x "Tarik_Crash_Log_Panic_Full.bat".
+  4. Buka folder hasil tarikan di Desktop, buka file "panic-full-....ips" pakai Notepad.
+  5. Cari kata "missing sensor":
+     - prs0       : Fleksibel lubang charger bawah rusak (Ganti Dock Charger).
+     - mic1       : Fleksibel tombol on/off & flash atas rusak (Ganti Flex Power).
+     - tg0b / tg0v: Sensor baterai rusak / konektor kendor (Ganti Baterai).
+     - AOP PANIC  : Sensor speaker depan / Face ID terkena air.
+  6. Ganti sparepart fleksibel yang terdeteksi rusak tersebut!
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * iPhone harus bisa menyala minimal 1-2 menit untuk menekan tombol "Trust".
+  * Jika iPhone mati total (tidak bisa nyala sama sekali), panic log tidak bisa ditarik.
+
+================================================================================
+2. Menu_Servis_iPhone.bat -> Opsi: KELUAR DARI RECOVERY MODE
+================================================================================
+- FUNGSI:
+  Mengirim perintah "irecovery -n" ke chip iBoot untuk membatalkan loop Recovery Mode.
+- KONDISI PENGGUNAAN:
+  Saat iPhone nyangkut di logo kabel charger / logo iTunes/komputer dan menolak masuk menu.
+- STEP BY STEP CARA PAKAI:
+  1. Colokkan iPhone yang nyangkut di layar kabel ke laptop.
+  2. Buka "Menu_Servis_iPhone.bat" -> Pilih menu [5] KELUAR DARI RECOVERY MODE.
+  3. iPhone akan langsung restart dan menyala normal kembali ke menu tanpa hilang data!
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika sistem iOS di dalam iPhone memang sudah corrupt parah atau memori NAND rusak,
+    iPhone akan tetap kembali ke recovery mode (Wajib di-flash ulang via iTunes/3uTools).
+
+================================================================================
+3. Menu_Servis_iPhone.bat -> Opsi: CEK KESEHATAN BATERAI (CYCLE COUNT)
+================================================================================
+- FUNGSI:
+  Membaca sensor asli com.apple.mobile.battery untuk mengetahui Cycle Count baterai.
+- KONDISI PENGGUNAAN:
+  Saat membeli iPhone second atau klien ingin tahu kesehatan baterai yang sesungguhnya
+  (karena persentase Battery Health di menu Pengaturan sering disuntik/dimanipulasi).
+- STEP BY STEP CARA PAKAI:
+  1. Colokkan iPhone (kondisi menyala dan di-Trust).
+  2. Buka Menu Servis iPhone -> Pilih menu [2] Cek Kesehatan Baterai.
+  3. Lihat angka "CycleCount" (jumlah berapa kali baterai dicas dari 0 sampai 100%):
+     - 0 - 300 kali   : Baterai masih sangat bagus (Original/Fresh).
+     - 300 - 600 kali : Baterai normal pemakaian wajar.
+     - Di atas 800x   : Baterai sudah soak/wajib diganti.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika baterai iPhone diganti baterai non-original tanpa memindahkan chip BMS ori,
+    nilai CycleCount mungkin tidak terbaca oleh sistem lockdown Apple.
+
+================================================================================
+4. Cek_Chip_DFU_Recovery_irecovery.bat
+================================================================================
+- FUNGSI:
+  Membaca ECID, CPID prosesor Apple, dan status mode (DFU vs Recovery) langsung dari BootROM.
+- KONDISI PENGGUNAAN:
+  Saat iPhone mati total (layar hitam) untuk memastikan apakah mesin masih hidup
+  di level chip atau motherboard mati total (short).
+- STEP BY STEP CARA PAKAI:
+  1. Colokkan iPhone ke laptop.
+  2. Klik 2x file bat. Jika terdeteksi chip Apple (CPID: 0x80xx), berarti mesin masih
+     hidup dan bisa dilakukan tindakan software/flashing.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika jalur USB lightning korslet atau jalur daya VDD_MAIN motherboard mati total,
+    chip tidak akan mendapat daya dan tidak akan terdeteksi di laptop.
+
+================================================================================
+5. Ambil_Screenshot_iPhone.bat
+================================================================================
+- FUNGSI:
+  Mengambil tangkapan layar iPhone langsung ke file PNG di Desktop tanpa tombol fisik.
+- KONDISI PENGGUNAAN:
+  Untuk bukti pengerjaan unit atau saat tombol fisik power/volume iPhone rusak.
+- CARA PAKAI: Klik 2x file bat saat iPhone menyala dan terhubung.
+================================================================================

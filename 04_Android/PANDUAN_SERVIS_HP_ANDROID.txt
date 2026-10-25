@@ -1,0 +1,110 @@
+================================================================================
+          PANDUAN LENGKAP SERVIS HP ANDROID TEKNISI LAPANGAN
+================================================================================
+
+Folder ini dirancang khusus untuk menangani perbaikan software HP Android
+tanpa perlu membeli software dongle / aktivasi berbayar (UnlockTool, Chimera, dll).
+Semua tools menggunakan binary resmi Google Platform-Tools (ADB & Fastboot),
+Scrcpy Display Engine, dan Driver Resmi Google.
+
+DAFTAR ISI:
+1. Penjelasan Tools di Folder Ini
+2. Cara Mengaktifkan USB Debugging di Berbagai Merk HP
+3. Kombinasi Tombol Fisik Masuk Recovery & Fastboot Mode
+4. Kode Rahasia Teknisi (Hardware Test & Engineer Mode)
+5. Penyelamatan Data Layar Pecah Menggunakan Scrcpy
+6. Tips Mengatasi Masalah Driver (Tanda Seru Kuning)
+
+================================================================================
+1. PENJELASAN TOOLS DI FOLDER INI
+================================================================================
+- Menu_Servis_Android.bat:
+  Dashboard utama teknisi untuk membaca info HP, reboot ke recovery/fastboot/EDL,
+  hapus kunci pola/PIN, buka setting, dan terminal shell.
+
+- Fastboot_Toolkit.bat:
+  Tool khusus mode Fastboot/Bootloader saat HP bootloop atau ingin di-UBL
+  (Unlock Bootloader) dan Wipe Data/Hard Reset dari PC.
+
+- Layar_HP_Mirror_Scrcpy.bat:
+  Menampilkan dan mengendalikan layar HP sepenuhnya di laptop menggunakan
+  mouse dan keyboard. Penyelamat jika LCD/layar sentuh pecah.
+
+- Backup_Data_HP_Kilat.bat:
+  Menyedot (pull) seluruh galeri foto/video (DCIM), media WhatsApp, dan folder
+  Download ke Desktop laptop teknisi sebelum HP diformat/diservis.
+
+- Pasang_APK_Otomatis.bat:
+  Install file aplikasi APK langsung via drag-and-drop tanpa copy ke memori HP.
+
+- Driver_USB_Google (Folder):
+  Berisi driver android_winusb.inf resmi Google dan script 1-klik pasang driver
+  "Pasang_Driver_Android_Google.bat" untuk mengatasi tanda seru kuning di Device Manager.
+
+================================================================================
+2. CARA MENGAKTIFKAN USB DEBUGGING DI BERBAGAI MERK HP
+================================================================================
+A. Xiaomi / Redmi / POCO:
+   - Buka Pengaturan -> Tentang Ponsel -> Ketuk "Versi MIUI" / "Versi OS" 7 KALI.
+   - Buka Setelan Tambahan -> Opsi Pengembang -> Aktifkan "Debugging USB".
+   - (Penting Xiaomi): Aktifkan juga "Instal via USB" dan "Debugging USB (Setelan keamanan)".
+
+B. Samsung:
+   - Buka Pengaturan -> Tentang Ponsel -> Informasi Perangkat Lunak.
+   - Ketuk "Nomor Versi (Build Number)" 7 KALI berturut-turut.
+   - Kembali ke menu utama Pengaturan -> Pilihan Pengembang -> Aktifkan "Debugging USB".
+
+C. Oppo & Realme:
+   - Buka Pengaturan -> Tentang Perangkat -> Versi -> Ketuk "Nomor Kompilasi" 7 KALI.
+   - Buka Pengaturan Sistem / Pengaturan Tambahan -> Opsi Pengembang -> Aktifkan "Debugging USB".
+
+D. Vivo:
+   - Buka Pengaturan -> Tentang Ponsel -> Informasi Perangkat Lunak.
+   - Ketuk "Nomor Versi" 7 KALI.
+   - Buka Pengaturan Sistem -> Opsi Pengembang -> Aktifkan "Debugging USB".
+
+* CATATAN: Saat pertama kali HP dicolok ke laptop dengan USB debugging aktif,
+  akan muncul pop-up di layar HP: "Izinkan USB debugging?".
+  WAJIB CENTANG "Selalu izinkan dari komputer ini", lalu klik OKE!
+
+================================================================================
+3. KOMBINASI TOMBOL FISIK MASUK RECOVERY & FASTBOOT (SAAT HP MATI)
+================================================================================
+1. Xiaomi / Redmi / POCO:
+   - Fastboot Mode : Tekan dan tahan tombol [POWER + VOLUME BAWAH].
+   - Recovery Mode : Tekan dan tahan tombol [POWER + VOLUME ATAS].
+
+2. Samsung:
+   - Recovery Mode : Colokkan kabel USB dari laptop ke HP, lalu tekan dan tahan
+     tombol [POWER + VOLUME ATAS] sampai muncul logo Samsung.
+   - Download Mode (Odin) : Colok kabel USB sambil menahan [VOLUME ATAS + VOLUME BAWAH].
+
+3. Oppo & Realme:
+   - Recovery Mode : Tekan dan tahan tombol [POWER + VOLUME BAWAH].
+
+4. Vivo:
+   - Fastboot Mode : Tekan dan tahan tombol [POWER + VOLUME ATAS].
+
+================================================================================
+4. KODE RAHASIA TEKNISI DI DIAL PAD TELEPON
+================================================================================
+- Samsung Hardware Test Mode : *#0*#
+  (Tes layar merah/hijau/biru, touch screen grid, getar, sensor, kamera depan/belakang).
+- Xiaomi CIT Hardware Test   : *#*#6484#*#* atau *#*#64663#*#*
+  (Diagnosa seluruh komponen HP Xiaomi: mic, charger, sensor proximity, accelerometer).
+- Oppo & Realme Engineer Mode: *#899#
+  (Manual test seluruh hardware dan membaca status software versi pabrik).
+- Vivo Factory Test          : *#558#
+- Cek Nomor IMEI Resmi       : *#06#
+
+================================================================================
+5. PENYELAMATAN DATA LAYAR PECAH (TOUCHSCREEN MATI)
+================================================================================
+Jika klien datang dengan kondisi HP layar retak atau sensor sentuh tidak bisa ditekan:
+1. Colokkan HP ke laptop menggunakan kabel data USB original/bagus.
+2. Jalankan "Layar_HP_Mirror_Scrcpy.bat".
+3. Layar HP akan langsung muncul sebagai jendela di layar laptop Anda.
+4. Anda dapat menggunakan Mouse laptop untuk mengklik aplikasi, memasukkan pola/PIN,
+   membuka WhatsApp, dan mengekspor kontak tanpa perlu mengganti LCD!
+5. Untuk menyedot seluruh foto secara otomatis, jalankan "Backup_Data_HP_Kilat.bat".
+================================================================================

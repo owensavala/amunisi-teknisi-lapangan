@@ -1,0 +1,110 @@
+================================================================================
+          SOP & PANDUAN LENGKAP: 02_PRINTER
+================================================================================
+Lokasi Folder: D:\mus\master\Tools_Teknisi_Wajib\02_Printer\
+
+Semua tool di folder ini dirancang untuk mengatasi masalah printer di kantor,
+sekolah, percetakan, dan lab komputer.
+
+================================================================================
+1. Fix_Sharing_Printer_0x0000011b.bat
+================================================================================
+- FUNGSI:
+  Memperbaiki registry otentikasi RPC Windows agar printer yang dishare di jaringan
+  bisa disambungkan oleh laptop/komputer lain tanpa ditolak error 0x0000011b / 0x00000709.
+- KONDISI PENGGUNAAN:
+  Saat komputer klien kantor/lab ingin menyambung ke printer bersama, tapi muncul error:
+  "Operation failed with error 0x0000011b" atau "0x00000709".
+- STEP BY STEP CARA PAKAI:
+  1. Jalankan script ini di Komputer Server (komputer yang dicolok kabel USB printer).
+     Pilih opsi [1] atau [3].
+  2. Jalankan script ini di Laptop Klien (komputer yang numpang nge-print).
+     Pilih opsi [2] atau [3].
+  3. Buka Windows + R di laptop klien, ketik: "\\IP_KOMPUTER_SERVER" (contoh: \\192.168.1.10).
+  4. Klik kanan printer yang muncul -> Pilih "Connect".
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Komputer Server dan Klien wajib berada di dalam SATU JARINGAN LOKAL (subnet IP sama).
+  * Jika firewall pihak ketiga (seperti antivirus Kaspersky / Avast) memblokir port
+    445/139, port tersebut harus diizinkan secara manual di setting antivirus.
+
+================================================================================
+2. Perbaikan_Printer_Offline.bat
+================================================================================
+- FUNGSI:
+  Memaksa antrian printer dari status "Offline" / "Paused" menjadi "Online" dan
+  menghilangkan centang "Use Printer Offline".
+- KONDISI PENGGUNAAN:
+  Saat lampu printer menyala hijau dan kabel tercolok, tapi di Word / PDF tertulis "Offline".
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat (otomatis meminta izin Administrator).
+  2. Script akan mencari seluruh printer dan mengubah nilai WorkOffline = False.
+  3. Spooler akan direstart otomatis dalam 1 detik.
+  4. Buka antrian cetak, status akan berubah menjadi "Ready".
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * TIDAK BISA memperbaiki jika kabel USB printer putus di dalam, longgar, atau printer mati.
+  * Jika lampu indikator printer berkedip merah (error hardware), printer tetap offline
+    sampai masalah mekanik diselesaikan.
+
+================================================================================
+3. Reset_Print_Spooler.bat
+================================================================================
+- FUNGSI:
+  Mengosongkan folder antrian C:\Windows\System32\spool\PRINTERS dan me-restart Spooler.
+- KONDISI PENGGUNAAN:
+  Saat ada dokumen salah cetak yang macet (status "Deleting... / Printing") dan
+  tidak bisa dihapus, menyebabkan dokumen baru berikutnya tidak mau keluar.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat.
+  2. Dalam 3 detik, seluruh antrian dokumen yang macet akan lenyap bersih tanpa perlu restart laptop.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak ada batasan sistem. Namun jika kertas tersangkut fisik (Paper Jam) di dalam
+    printer, kertas harus ditarik keluar manual terlebih dahulu.
+
+================================================================================
+4. Kirim_Halaman_Tes_Cetak.bat
+================================================================================
+- FUNGSI:
+  Mengirim sinyal cetak resmi Windows Test Page via Command Prompt ke printer tertentu.
+- KONDISI PENGGUNAAN:
+  Untuk membuktikan kepada klien bahwa komunikasi laptop ke printer sudah sukses
+  tanpa harus membuka aplikasi Microsoft Word atau file dokumen pribadi.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat.
+  2. Ketik nama printer yang ingin diuji persis sesuai daftar yang muncul, lalu tekan Enter.
+  3. Kertas tes resmi Windows akan keluar dari printer.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Gagal jika printer kehabisan kertas, kehabisan tinta, atau cover penutup printer terbuka.
+
+================================================================================
+5. Bersihkan_Driver_Printer_Lama.bat
+================================================================================
+- FUNGSI:
+  Membuka dialog Print Server Properties untuk mencabut paket driver printer corrupt.
+- KONDISI PENGGUNAAN:
+  Saat ingin menghapus printer lama, tapi selalu muncul error "The printer driver
+  is currently in use", atau Spooler Windows sering crash mendadak.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat. Spooler akan direstart untuk melepaskan file lock.
+  2. Jendela "Print Server Properties" tab Driver akan terbuka otomatis.
+  3. Pilih driver yang bermasalah -> Klik "Remove" -> Pilih "Remove driver and driver package".
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika printer tersebut masih ada di daftar antrian "Printers & Scanners", antriannya
+    harus dihapus terlebih dahulu di Settings Windows.
+
+================================================================================
+6. Cetak_Tes_Warna_Nozzle.html
+================================================================================
+- FUNGSI:
+  Halaman visual tes 4 kanal warna (CMYK: Cyan, Magenta, Yellow, Black) & garis kerapatan nozzle.
+- KONDISI PENGGUNAAN:
+  Saat hasil cetakan bergaris, warna pudar, atau foto keluar dengan warna salah.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file HTML (terbuka di browser apa pun).
+  2. Klik tombol "CETAK HALAMAN UJI SEKARANG".
+  3. Perhatikan kertas yang keluar:
+     - Jika warna Merah (Magenta) tidak keluar sama sekali: Head/selang warna merah masuk angin/mampet.
+     - Jika kotak hitam bergaris-garis putih: Lakukan Head Cleaning 1-2 kali.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Ini adalah alat diagnosa visual, bukan pembersih kimiawi. Jika head buntu total
+    karena printer tidak dipakai 6 bulan, head harus disedot manual pakai cairan head cleaner.
+================================================================================

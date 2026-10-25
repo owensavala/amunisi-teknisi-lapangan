@@ -1,0 +1,99 @@
+================================================================================
+          SOP & PANDUAN LENGKAP: 04_ANDROID
+================================================================================
+Lokasi Folder: D:\mus\master\Tools_Teknisi_Wajib\04_Android\
+
+Semua tool di folder ini dirancang untuk servis software Android offline
+menggunakan Google Platform-Tools resmi (ADB & Fastboot), Scrcpy, dan Driver Google.
+
+CATATAN TEKNISI:
+Semua tool dijalankan dari LAPTOP. HP dihubungkan menggunakan kabel data USB original.
+
+================================================================================
+1. Menu_Servis_Android.bat
+================================================================================
+- FUNGSI:
+  Dashboard utama multi-tool: membaca identitas HP, status baterai, reboot ke Recovery,
+  Fastboot, EDL (Qualcomm 9008), reset kunci layar, dan membuka terminal shell.
+- KONDISI PENGGUNAAN:
+  Saat HP terhubung dalam mode normal (USB Debugging) untuk diagnosa cepat atau
+  jika tombol fisik volume rusak sehingga tidak bisa masuk recovery secara manual.
+- STEP BY STEP CARA PAKAI:
+  1. Hubungkan HP ke laptop via kabel USB dengan USB Debugging aktif.
+  2. Klik 2x "Menu_Servis_Android.bat".
+  3. Pilih menu [1] Cek Perangkat atau [3] Baca Informasi Lengkap HP.
+  4. Untuk masuk recovery tanpa tombol fisik, pilih menu [4] Reboot ke Recovery Mode.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Wajib USB Debugging aktif pada HP. Jika HP mati total atau terkunci layar dan belum
+    pernah di-Trust, perintah ADB akan dijawab "unauthorized" atau "device not found".
+
+================================================================================
+2. Layar_HP_Mirror_Scrcpy.bat (Scrcpy Portable v5.0.1)
+================================================================================
+- FUNGSI:
+  Menampilkan layar HP Android ke monitor laptop dan mengendalikannya 100% menggunakan
+  mouse dan keyboard laptop (Resolusi penuh & 60 FPS).
+- KONDISI PENGGUNAAN:
+  Penyelamat nomor satu saat HP klien LAYAR SENTUH PECAH / RETAK / MATI SENTUH, tapi mesin
+  hidup dan butuh selamatkan data WhatsApp, galeri, atau backup kontak sebelum ganti LCD.
+- STEP BY STEP CARA PAKAI:
+  1. Sambungkan HP ke laptop dengan kabel data USB.
+  2. Klik 2x "Layar_HP_Mirror_Scrcpy.bat" -> Pilih [1] Tampilkan Layar HP (Normal).
+  3. Jendela layar HP akan muncul di layar laptop Anda.
+  4. Gunakan klik kiri mouse untuk menyentuh, klik kanan untuk tombol Back, dan keyboard PC untuk mengetik!
+  5. Pilih opsi [2] jika ingin layar fisik HP gelap (mati) untuk menghemat baterai saat transfer data.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * MUTLAK BUTUH USB DEBUGGING AKTIF. Jika USB Debugging mati dan layar HP hitam pekat
+    serta terkunci sandi, Scrcpy tidak bisa menembus otentikasi RSA Android.
+  * Kabel USB harus tipe Data Cable, bukan kabel cas murahan yang tidak punya jalur transfer data.
+
+================================================================================
+3. Fastboot_Toolkit.bat
+================================================================================
+- FUNGSI:
+  Mengontrol HP Android di level Bootloader: membaca info hardware, Unlock Bootloader (UBL),
+  dan melakukan Hard Reset (Wipe Userdata & Cache) dari PC.
+- KONDISI PENGGUNAAN:
+  Saat HP Android BOOTLOOP (mentok di logo), restart berulang-ulang, atau lupa pola
+  tapi menu recovery fisik tidak bisa dibuka karena tombol volume rusak.
+- STEP BY STEP CARA PAKAI:
+  1. Matikan HP. Tahan tombol [Power + Volume Bawah] sampai masuk layar Fastboot.
+  2. Colokkan kabel USB ke laptop.
+  3. Buka "Fastboot_Toolkit.bat" -> Pilih [1] Cek Perangkat (pastikan serial terdeteksi).
+  4. Pilih [3] Hard Reset (Ketik YAKIN untuk konfirmasi format data).
+  5. Pilih [7] Reboot Normal. HP akan menyala bersih seperti setelan pabrik!
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Tidak bisa melakukan UBL jika pabrikan HP mengunci server tokennya (seperti Huawei
+    atau beberapa seri Oppo/Vivo modern yang butuh akun otorisasi server).
+  * Hard Reset via Fastboot akan menghapus seluruh data HP (Foto, Chat, Kontak).
+
+================================================================================
+4. Backup_Data_HP_Kilat.bat
+================================================================================
+- FUNGSI:
+  Menyedot (pull) folder Galeri Foto/Video (/sdcard/DCIM), Media WhatsApp, dan Download
+  dari HP langsung ke folder rapi di Desktop laptop teknisi.
+- KONDISI PENGGUNAAN:
+  Sebelum melakukan reset pabrik atau servis software pada HP klien agar data penting selamat.
+- STEP BY STEP CARA PAKAI:
+  1. Colokkan HP dengan USB Debugging aktif.
+  2. Klik 2x file bat -> Ketik Y untuk konfirmasi mulai menyalin.
+  3. Script akan menyalin seluruh folder secara otomatis dan membuka foldernya di Desktop.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Memori internal HP yang terenkripsi dan rusak fisiknya (bad NAND/eMMC) akan gagal dibaca.
+
+================================================================================
+5. Pasang_Driver_Android_Google.bat (Folder: Driver_USB_Google)
+================================================================================
+- FUNGSI:
+  Memasang file android_winusb.inf resmi Google ke Windows Driver Store.
+- KONDISI PENGGUNAAN:
+  Saat HP dicolokkan tapi di Device Manager muncul tanda seru kuning pada:
+  "Android", "Android Bootloader Interface", atau "ADB Interface".
+- STEP BY STEP CARA PAKAI:
+  1. Buka folder Driver_USB_Google -> Klik 2x "Pasang_Driver_Android_Google.bat".
+  2. Cabut dan colokkan kembali kabel USB HP. Tanda seru kuning akan hilang seketika.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Khusus untuk mode EDL Qualcomm 9008 (chip mati total), membutuhkan driver khusus
+    Qualcomm QDLoader 9008, bukan driver Google ADB.
+================================================================================

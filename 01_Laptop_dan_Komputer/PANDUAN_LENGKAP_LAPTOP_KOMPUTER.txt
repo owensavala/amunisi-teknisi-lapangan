@@ -1,0 +1,108 @@
+================================================================================
+          PANDUAN LENGKAP TOOLS TEKNISI: LAPTOP DAN KOMPUTER
+================================================================================
+
+Folder ini dirancang khusus untuk memenuhi semua kebutuhan servis teknisi lapangan,
+mulai dari diagnosa kerusakan fisik (hardware), pembersihan sistem, perbaikan Windows,
+manajemen driver, hingga bypass batasan sistem saat instalasi.
+
+Semua script dibuat otomatis (Run As Administrator otomatis) dan 100% OFFLINE.
+
+--------------------------------------------------------------------------------
+1. DIAGNOSTIK HARDWARE (03_Diagnostik_Hardware)
+--------------------------------------------------------------------------------
+- Cek_Kesehatan_Storage_CMD.bat:
+  Melihat status kesehatan SSD / Harddisk, tipe media (SSD vs HDD), dan status
+  prediksi kerusakan (S.M.A.R.T. Failure Predict) langsung dari command prompt.
+
+- Generate_Laporan_Baterai.bat:
+  Membuat laporan kesehatan baterai laptop resmi Windows (HTML) ke Desktop dan langsung
+  membukanya. Membandingkan DESIGN CAPACITY vs FULL CHARGE CAPACITY untuk mendeteksi
+  baterai drop/bocor serta menghitung CYCLE COUNT.
+
+- Cek_Spek_Lengkap_Laptop.bat:
+  Membaca serial number laptop, model motherboard, slot RAM terpakai, dan CPU.
+
+- CrystalDiskInfo (Folder):
+  Software portable standar industri untuk melihat persentase kesehatan SSD (TBW),
+  suhu drive, serta jumlah Bad Sector pada HDD.
+
+- BatteryInfoView & HWMonitor (Folder):
+  Memonitor voltase baterai serta suhu CPU/VGA untuk mendeteksi laptop overheat.
+
+- Tes_Keyboard_Offline.html:
+  Tes tombol keyboard laptop mati / lengket langsung di browser tanpa koneksi internet.
+
+--------------------------------------------------------------------------------
+2. TWEAK, DRIVER & PERBAIKAN WINDOWS (14_Tweak_Windows_Driver)
+--------------------------------------------------------------------------------
+- Perbaikan_Icon_Blank_Putih.bat:
+  Membangun ulang (rebuild) Icon Cache & Thumbnail Cache yang rusak/corrupt saat
+  ikon desktop berubah menjadi kertas putih polos.
+
+- Reset_Windows_Update_Macet.bat:
+  Mereset tumpukan Windows Update, membersihkan folder SoftwareDistribution dan
+  catroot2 yang macet di 0% atau memicu error code (0x80070002, dll).
+
+- Kontrol_Windows_Update.bat:
+  Menu interaktif untuk mematikan permanen (STOP/DISABLE) Windows Update agar lab
+  tidak kehabisan kuota atau restart tiba-tiba saat ujian, dan menyalakannya kembali normal.
+
+- Pembersih_Sampah_Windows_Temp.bat:
+  Membersihkan file sampah mendalam (%temp%, C:\Windows\Temp, Prefetch, Dump Crash,
+  Delivery Optimization) untuk melegakan penyimpanan SSD tanpa menghapus data pribadi klien.
+
+- Paksa_Hapus_File_Folder_Terkunci.bat:
+  Mengambil alih kepemilikan (Take Ownership) dan memaksa hapus file/folder bandel
+  yang memunculkan pesan "Access Denied" atau terkunci oleh sistem.
+
+- Reset_Koneksi_Internet_Laptop.bat:
+  Mereset tumpukan protokol TCP/IP, Winsock Catalog, dan Flush DNS untuk mengatasi
+  masalah "No Internet, Secured" atau DNS Failure pada laptop.
+
+- Bypass_Syarat_Windows_11_TPM_CPU.bat:
+  Menyuntikkan registry LabConfig & MoSetup untuk bypass verifikasi TPM 2.0, Secure
+  Boot, dan CPU jadul saat install ulang atau upgrade Windows 11.
+
+- Backup_Semua_Driver_Laptop.bat & Restore_Driver_Laptop.bat:
+  Mengekstrak seluruh driver bawaan laptop pihak ketiga (Wi-Fi, VGA, Audio, Chipset)
+  ke folder sebelum install ulang, dan memasangnya kembali otomatis tanpa kuota internet.
+
+- Perbaikan_Audio_Suara.bat:
+  Mereset service audio Windows dan me-refresh hardware Realtek/Conexant saat suara hilang.
+
+- Perbaikan_Windows_Rusak_SFC_DISM.bat:
+  Menjalankan SFC /scannow dan DISM Online Cleanup untuk memperbaiki file sistem Windows yang korup.
+
+- Optimasi_Performa_Maksimal.bat:
+  Mengaktifkan Power Plan "Ultimate Performance", mematikan animasi berat dan telemetri latar belakang.
+
+- Masuk_Safe_Mode.bat & Keluar_Safe_Mode.bat:
+  1-klik berpindah ke Safe Mode Windows dan kembali ke mode normal tanpa perlu tombol F8/Shift.
+
+- Restart_Explorer_Desktop.bat:
+  Me-restart taskbar dan desktop seketika jika antarmuka hang atau layar hitam.
+
+- Tampilkan_Ikon_Desktop.bat:
+  Menampilkan ikon "This PC", "User", "Network", "Control Panel" di desktop baru Windows 10/11.
+
+--------------------------------------------------------------------------------
+3. AKTIVASI & LISENSI RESMI (04_Aktivasi_Resmi_MAS)
+--------------------------------------------------------------------------------
+- Cek_Serial_Key_Bawaan_Laptop_BIOS.bat:
+  Membaca Product Key Windows asli bawaan pabrik yang tertanam di chip BIOS (MSDM)
+  motherboard laptop, sangat berguna saat install ulang agar lisensi asli tidak hilang.
+
+- Microsoft-Activation-Scripts (MAS):
+  Aktivasi digital HWID permanen resmi untuk Windows dan Office.
+
+--------------------------------------------------------------------------------
+4. PERSIAPAN UJIAN, PENYELAMAT USB & SANDI
+--------------------------------------------------------------------------------
+- 01_Ujian_ANBK_TKA: Script saklar 1-klik persiapan laptop klien ujian ANBK/TKA.
+- 07_Fix_Microsoft_Family: Bypass pembatasan akun anak/family safety.
+- 08_Reset_Password_Windows: Bypass PIN / Password admin via utilman backdoor USB installer.
+- 09_Penyelamat_Flashdisk: Pembersih virus shortcut dan virus Recycler Base64.
+- 11_Backup_Data_Klien: Backup kilat data Desktop, Documents, Downloads ke drive eksternal.
+- 12_Keamanan_Lab_USB & 15_Keamanan_USB_Ujian: Kontrol port USB tulis/baca di lab sekolah.
+================================================================================

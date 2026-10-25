@@ -1,0 +1,88 @@
+================================================================================
+          SOP & PANDUAN TEKNISI: PENANGANAN VIRUS GANAS (EXPIRUS, SALITY, VIRUT)
+================================================================================
+Lokasi Folder: D:\mus\master\Tools_Teknisi_Wajib\01_Laptop_dan_Komputer\10_Antivirus_Darurat_dan_Disinfeksi\
+
+MENGAPA VIRUS INI SANGAT BERBAHAYA?
+Virus Win32/Expiro, Win32/Sality, dan Win32/Virut BUKAN virus shortcut biasa.
+Mereka adalah kelompok virus paling merusak bernama "POLYMORPHIC FILE INFECTOR".
+
+Karakteristik & Gejala Serangan:
+1. Menyerang dan menyuntikkan (inject) kodenya ke SELURUH file .EXE dan .SCR
+   di drive C:, D:, E:, dan flashdisk yang dicolokkan.
+2. Setiap kali Anda mengklik aplikasi apa pun (Chrome, Word, Software Teknisi),
+   file tersebut akan crash dengan error:
+   "The application was unable to start correctly (0xc0000005)" atau
+   "Side-by-side configuration invalid", atau klik .exe malah membuka Notepad!
+3. Mematikan fitur sistem pertahanan:
+   - Task Manager diblokir ("disabled by your administrator").
+   - Regedit diblokir.
+   - Command Prompt (CMD) dimatikan.
+   - Safe Mode dirusak kuncinya (layar biru / reboot saat coba Safe Mode).
+   - Windows Defender dimatikan paksa.
+
+================================================================================
+ATURAN EMAS TEKNISI (GOLDEN RULE) - WAJIB DIINGAT!
+================================================================================
+JANGAN PERNAH MENCOLOKKAN FLASHDISK MASTER TEKNISI KE LAPTOP YANG TERINFEKSI
+EXPIRUS / SALITY TANPA MENGUNCI WRITE-PROTECT!
+
+Jika Anda mencolokkan flashdisk master biasa yang berisi installer Windows,
+driver, dan software:
+-> Virus Expiro akan MENGINFEKSI RIBUAN FILE .EXE DI FLASHDISK ANDA DALAM 30 DETIK!
+-> Flashdisk master Anda akan menjadi penyebar wabah virus ke laptop klien berikutnya!
+
+Pencegahan:
+Gunakan menu "Kunci_Port_USB.bat" (Write-Protect) atau gunakan flashdisk yang
+memiliki saklar fisik hardware Write-Protect saat memeriksa laptop berpenyakit ini.
+
+================================================================================
+LANGKAH STEP BY STEP PENANGANAN DI LAPANGAN
+================================================================================
+
+LANGKAH 1: MEMULIHKAN SISTEM AGAR BISA JALAN (DARURAT)
+1. Jika file .EXE tidak bisa diklik:
+   Klik kanan "Fix_Asosiasi_File_EXE_Rusak.reg" -> Pilih "Merge" -> Klik Yes.
+   Atau jalankan "Fix_Asosiasi_File_EXE_Rusak.bat".
+2. Buka blokir sistem:
+   Jalankan "Buka_Blokir_TaskManager_Regedit_CMD.bat".
+   Sekarang Task Manager dan Regedit sudah bisa dibuka kembali.
+
+LANGKAH 2: SCAN & DISINFEKSI (MEMISAHKAN VIRUS DARI FILE .EXE)
+Kenapa tidak boleh langsung dihapus sembarangan oleh antivirus biasa?
+-> Karena jika ada 4.000 file .exe terinfeksi, antivirus biasa akan MENGHAPUS
+   ke-4.000 software tersebut sehingga Windows hancur dan laptop mati total!
+-> Kita butuh teknik "DISINFECT" (Membersihkan virus tanpa menghapus file software aslinya).
+
+Gunakan tool di folder ini:
+1. Jalankan "Kaspersky_Virus_Removal_Tool_KVRT.exe" (Portable).
+2. Klik "Change parameters" -> Centang seluruh drive (C:, D:, E:, System Memory).
+3. Klik "Start scan".
+4. Jika KVRT mendeteksi Expiro/Sality, pilih opsi "Disinfect" (Bukan Delete).
+5. KVRT akan mengupas kode virus dari kepala file PE exe dan mengembalikan file asli!
+
+LANGKAH 3: PEMBERSIHAN ADWARE & REGISTRY CORRUPT
+Jalankan "AdwCleaner.exe" untuk membersihkan proxy jahat, ekstensi browser pembajak,
+dan sisa registry malware yang masih tertinggal.
+
+================================================================================
+KAPAN HARUS INSTAL ULANG TOTAL?
+================================================================================
+Jika laptop klien terinfeksi Expiro stadium akhir:
+- File explorer.exe dan svchost.exe inti Windows sudah rusak dan BSOD berulang kali.
+- Lebih dari 80% aplikasi sistem corrupt.
+
+Trik Menyelamatkan Data Klien Sebelum Instal Ulang:
+Virus Expiro HANYA menginfeksi file eksekusi (.EXE, .DLL, .SCR, .SYS).
+Virus Expiro TIDAK BISA menginfeksi dokumen pribadi:
+- File Word (.docx), Excel (.xlsx), PowerPoint (.pptx).
+- File PDF (.pdf).
+- File Foto (.jpg, .png) dan Video (.mp4).
+- File Arsip (.zip, .rar).
+
+Cara Backup Aman:
+1. Boot laptop ke WinPE / USB Installer Windows.
+2. Salin HANYA file dokumen, foto, dan database kerja klien ke harddisk eksternal.
+3. JANGAN PERNAH menyalin file master installer .exe dari laptop yang terinfeksi!
+4. Format bersih partisi C: dan instal ulang Windows baru.
+================================================================================

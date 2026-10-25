@@ -1,0 +1,131 @@
+================================================================================
+          SOP & PANDUAN LENGKAP: 03_JARINGAN
+================================================================================
+Lokasi Folder: D:\mus\master\Tools_Teknisi_Wajib\03_Jaringan\
+
+Semua tool di folder ini dirancang untuk konfigurasi jaringan lab ujian sekolah,
+kantor, setting IP address, scanner, dan optimasi Wi-Fi.
+
+================================================================================
+1. Atur_IP_Address_Static_DHCP.bat
+================================================================================
+- FUNGSI:
+  Mengubah settingan IP Address kartu jaringan (LAN/Wi-Fi) secara kilat tanpa Control Panel.
+- KONDISI PENGGUNAAN:
+  Saat menyetel puluhan laptop peserta ANBK ke IP Static 192.168.0.x, Server VHD ke
+  192.168.0.200, atau mengembalikannya ke DHCP setelah ujian selesai.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat.
+  2. Pilih menu yang diinginkan:
+     - [1] KEMBALIKAN KE OTOMATIS (DHCP bawaan internet normal).
+     - [2] KLIEN UJIAN ANBK/CBT: Masukkan nomor urut klien (contoh: 15 -> disetel ke 192.168.0.15).
+     - [3] SERVER VHD UJIAN ANBK: Disetel otomatis ke 192.168.0.200, Subnet 255.255.255.0.
+     - [4] CUSTOM: Ketik IP, Subnet Mask, Gateway, dan DNS sendiri.
+  3. Ketik nama adapter sesuai daftar (misal: "Ethernet" atau "Wi-Fi").
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Wajib mengetik nama kartu jaringan dengan benar.
+  * Komputer klien dilarang memakai IP 192.168.0.200 karena akan IP Conflict dengan Server VHD!
+  * Tidak bisa internetan jika disetel IP Static ujian tapi router lab menggunakan IP 192.168.1.1.
+
+================================================================================
+2. Optimasi_Kecepatan_Wifi.bat
+================================================================================
+- FUNGSI:
+  Membuka batas kecepatan jaringan Windows (Disable Throttling), mengaktifkan TCP Window
+  Auto-Tuning, RSS multi-core, dan mematikan pengunggahan update diam-diam (Delivery Optimization).
+- KONDISI PENGGUNAAN:
+  Saat kecepatan Wi-Fi laptop terasa lambat, streaming sering buffering, atau download
+  tidak mencapai bandwidth maksimal paket langganan.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat (Run as Admin).
+  2. Tunggu 6 langkah optimasi selesai dan muncul tulisan [SUKSES].
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Script ini mengoptimalkan sistem laptop, BUKAN menambah kuota atau kecepatan dari
+    ISP (IndiHome/Starlink). Jika paket langganan hanya 10 Mbps, tidak bisa jadi 100 Mbps.
+  * Tidak bisa menembus dinding beton tebal jika jarak fisik ke router terlalu jauh.
+
+================================================================================
+3. Aktifkan_Network_Sharing_Folder.bat
+================================================================================
+- FUNGSI:
+  Mengubah profil jaringan ke Private, membuka port sharing di Firewall, dan mengaktifkan
+  service penemuan perangkat (FDResPub, fdPHost).
+- KONDISI PENGGUNAAN:
+  Saat komputer tidak muncul di folder "Network" di Windows Explorer atau muncul
+  error "Network path was not found (0x80070035)" saat membuka folder sharing.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat.
+  2. Tunggu hingga service dan firewall diaktifkan.
+  3. Buka File Explorer -> Network -> Seluruh PC lab akan langsung muncul.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Kedua komputer harus terhubung ke satu router/switch yang sama.
+  * Jika router disetel fitur "AP Isolation" / "Client Isolation" (biasanya di Wi-Fi kafe),
+    perangkat memang sengaja diisolasi oleh router sehingga tidak bisa saling melihat.
+
+================================================================================
+4. Izinkan_Ping_Masuk_Firewall.bat
+================================================================================
+- FUNGSI:
+  Membuka izin ICMP Echo Request di Windows Firewall.
+- KONDISI PENGGUNAAN:
+  Saat laptop klien di-ping dari server selalu menjawab "Request timed out" padahal kabel normal.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat -> Pilih opsi [1] Izinkan Ping.
+  2. Sekarang komputer ini bisa di-ping dari komputer proktor / server.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika ada firewall antivirus pihak ketiga (Norton/McAfee/Kaspersky), aturan ICMP
+    harus diizinkan juga di dalam pengaturan firewall antivirus tersebut.
+
+================================================================================
+5. Cek_Port_Jaringan_Server.bat
+================================================================================
+- FUNGSI:
+  Menguji apakah port aplikasi tertentu (80 HTTP, 8088 CBT, 3389 RDP, 445 SMB) pada
+  server sedang Terbuka (Open) atau Tertutup (Closed).
+- KONDISI PENGGUNAAN:
+  Saat klien tidak bisa membuka halaman web ujian/aplikasi kantor. Teknisi dapat
+  memastikan apakah masalahnya ada di aplikasi server yang mati atau di kabel jaringan.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat.
+  2. Masukkan IP Server target (misal: 192.168.0.200).
+  3. Tekan Enter untuk mengecek seluruh port penting sekaligus.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Jika server dalam kondisi mati total (Power off), semua port akan dilaporkan Tertutup.
+
+================================================================================
+6. Lihat_Semua_Password_Wifi.bat
+================================================================================
+- FUNGSI:
+  Mengekstrak seluruh profil Wi-Fi beserta kata sandi asli yang pernah terhubung.
+- KONDISI PENGGUNAAN:
+  Saat guru/klien lupa kata sandi Wi-Fi kantor/sekolah padahal laptopnya sudah pernah terhubung.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat.
+  2. Daftar nama SSID Wi-Fi dan sandinya langsung terpampang di layar terminal.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Hanya bisa membaca password Wi-Fi yang PERNAH terhubung di laptop ini sebelumnya.
+  * Tidak bisa menebak/membobol password Wi-Fi baru milik tetangga yang belum pernah terhubung.
+
+================================================================================
+7. Buat_Hotspot_Laptop.bat
+================================================================================
+- FUNGSI:
+  Memancarkan jaringan Wi-Fi virtual langsung dari kartu wireless laptop teknisi.
+- KONDISI PENGGUNAAN:
+  Saat berada di sekolah pulau terpencil yang hanya punya kabel LAN 1 colokan, dan
+  teknisi butuh membagikan koneksi internet ke HP atau tablet tanpa router tambahan.
+- STEP BY STEP CARA PAKAI:
+  1. Klik 2x file bat -> Pilih [1] Nyalakan Hotspot.
+  2. Masukkan nama Wi-Fi dan password minimal 8 digit.
+  3. Hubungkan HP/Laptop klien ke Wi-Fi tersebut.
+- BATASAN & KONDISI TIDAK BISA BERJALAN:
+  * Beberapa driver kartu Wi-Fi modern (Wi-Fi 6 Intel) mematikan fitur HostedNetwork legacy
+    (Wajib gunakan menu Mobile Hotspot bawaan Windows Settings).
+
+================================================================================
+8. Scan_IP_Komputer_Lab.bat & Tes_Koneksi_Ping_Ujian.bat
+================================================================================
+- FUNGSI:
+  Scan_IP melihat seluruh IP aktif di lab. Tes_Koneksi_Ping memantau ping tanpa henti.
+- CARA PAKAI: Klik 2x file bat untuk memantau apakah ada kabel LAN yang goyang/RTO.
+================================================================================

@@ -1,0 +1,115 @@
+================================================================================
+          PANDUAN LENGKAP SERVIS IPHONE, DFU MODE & ANALISIS PANIC LOG
+================================================================================
+
+Folder ini dirancang khusus untuk teknisi reparasi hardware & software iPhone
+menggunakan engine resmi "libimobiledevice" tanpa perlu menginstall 3uTools
+atau iTunes yang membebani kinerja laptop.
+
+DAFTAR ISI:
+1. Penjelasan Tools Otomatis di Folder Ini
+2. Solusi iPhone Nyangkut di Logo Kabel (Recovery Loop)
+3. Cara Membaca Panic Full Log (Penyebab iPhone Restart Tiap 3 Menit)
+4. Kombinasi Tombol Masuk Mode DFU (Layar Hitam Deteksi Chip)
+5. Cara Membedakan iPhone Bypass iCloud vs iPhone Normal
+
+================================================================================
+1. PENJELASAN TOOLS OTOMATIS DI FOLDER INI
+================================================================================
+- Menu_Servis_iPhone.bat:
+  Dashboard utama teknisi: cek info seri/IMEI, kesehatan baterai (Cycle Count),
+  status aktivasi, keluar dari recovery mode, backup penuh, dan matikan HP.
+
+- Tarik_Crash_Log_Panic_Full.bat:
+  Menyedot seluruh log sistem dan Panic Full ke Desktop PC untuk mendeteksi
+  komponen sparepart yang putus/rusak penyebab iPhone restart sendiri.
+
+- Cek_Chip_DFU_Recovery_irecovery.bat:
+  Membaca ECID, CPID prosesor (A10, A11, A12, A13, dll), dan model board
+  langsung dari chip BootROM saat iPhone dalam kondisi mati total/bootloop.
+
+- Ambil_Screenshot_iPhone.bat:
+  Mengambil tangkapan layar iPhone langsung ke file gambar PNG di Desktop PC.
+
+================================================================================
+2. SOLUSI IPHONE NYANGKUT DI LOGO KABEL (RECOVERY LOOP)
+================================================================================
+Gejala:
+Saat dinyalakan, iPhone langsung menampilkan gambar kabel charger mengarah
+ke logo laptop/komputer (Mode Recovery) dan tidak bisa masuk ke layar menu.
+
+Penyebab:
+Gagal update iOS OTA, sistem korup, atau tombol fisik volume/power tertekan.
+
+Solusi Teknisi Tanpa Perlu Hapus Data:
+1. Colokkan iPhone ke laptop menggunakan kabel data USB original.
+2. Jalankan "Menu_Servis_iPhone.bat", lalu pilih menu nomor:
+   [5] KELUAR DARI RECOVERY MODE (irecovery -n).
+3. Software akan mengirimkan perintah reboot normal ke chip iBoot.
+4. iPhone akan mati, menyala kembali dengan logo Apple putih, dan masuk ke menu!
+
+================================================================================
+3. CARA MEMBACA PANIC FULL LOG (IPHONE RESTART TIAP 3 MENIT)
+================================================================================
+Kasus Umum:
+iPhone hidup normal, namun tepat setiap 180 detik (3 menit) iPhone tiba-tiba
+mati dan menyala kembali (bootloop berkala).
+
+Langkah Diagnosa Akurat:
+1. Jalankan "Tarik_Crash_Log_Panic_Full.bat".
+2. Buka file hasil tarikan berawalan "panic-full-....ips" menggunakan Notepad.
+3. Tekan Ctrl + F, lalu cari kata kunci: "missing sensor" atau "SensorArray".
+
+KAMUS SENSOR RUSAK PADA IPHONE:
+-----------------------------------------------------------------------------
+KODE SENSOR    | ARTI KOMPONEN YANG RUSAK / WAJIB DIGANTI
+-----------------------------------------------------------------------------
+prs0           | Barometer Sensor pada Fleksibel Konektor Charger (Dock Flex).
+               | Solusi: Ganti fleksibel lubang colokan charger bawah.
+-----------------------------------------------------------------------------
+mic1           | Microphone Sensor pada Fleksibel Tombol Power / Lampu Flash.
+               | Solusi: Ganti fleksibel on/off & volume bagian atas.
+-----------------------------------------------------------------------------
+tg0b / tg0v    | Battery Gas Gauge (Sensor baterai).
+               | Solusi: Baterai soak, pin tengah baterai longgar, atau ganti baterai.
+-----------------------------------------------------------------------------
+AOP PANIC      | Fleksibel Sensor Proximity / Speaker Earpiece Depan (Face ID).
+               | Sering terjadi akibat terkena cipratan air saat teleponan.
+-----------------------------------------------------------------------------
+nand / ans     | Chip Memori Internal (NAND Flash) corrupt atau kaki lepas.
+               | Solusi: Reballing / ganti IC NAND di tempat servis motherboard.
+-----------------------------------------------------------------------------
+
+================================================================================
+4. KOMBINASI TOMBOL MASUK DFU MODE (UNTUK FLASH ULANG MATI TOTAL)
+================================================================================
+Catatan: Pada mode DFU yang benar, layar iPhone HARUS HITAM PEKAT (tidak ada gambar),
+tetapi terbaca di PC via "Cek_Chip_DFU_Recovery_irecovery.bat".
+
+A. iPhone 6s / 6s Plus / iPhone SE Gen 1:
+   - Tahan tombol [POWER + HOME] selama 8 detik.
+   - Lepaskan tombol Power, TETAP TAHAN tombol Home selama 8 detik sampai terdeteksi PC.
+
+B. iPhone 7 / 7 Plus:
+   - Tahan tombol [POWER + VOLUME BAWAH] selama 8 detik.
+   - Lepaskan tombol Power, TETAP TAHAN tombol Volume Bawah selama 8 detik.
+
+C. iPhone 8 / X / XR / XS / 11 / 12 / 13 / 14 / 15 / 16:
+   1. Tekan tombol VOLUME ATAS 1 kali (langsung lepas).
+   2. Tekan tombol VOLUME BAWAH 1 kali (langsung lepas).
+   3. Tekan dan TAHAN tombol POWER (Side Button) sampai layar hitam.
+   4. Begitu layar hitam, SEGERA TAHAN tombol VOLUME BAWAH bersamaan dengan tombol POWER
+      selama 5 detik.
+   5. Lepaskan tombol Power, tetapi TETAP TAHAN tombol VOLUME BAWAH selama 10 detik.
+   6. Layar tetap hitam pekat dan terdeteksi di laptop sebagai DFU Mode.
+
+================================================================================
+5. CARA MEMBEDAKAN IPHONE BYPASS ICLOUD VS IPHONE RESMI
+================================================================================
+Saat membeli iPhone bekas dari klien:
+1. Jalankan Menu Servis iPhone -> Pilih menu "Cek Status Aktivasi".
+2. Jika status: "FactoryActivated" dan terdapat profil MDM atau tidak bisa direset
+   pabrik di menu Pengaturan, iPhone tersebut adalah iPhone bypass/locked.
+3. iPhone resmi bebas reset akan menampilkan status "Activated" dengan IMEI dan
+   Serial Number yang cocok persis antara fisik cangkang, SIM Tray, dan sistem.
+================================================================================

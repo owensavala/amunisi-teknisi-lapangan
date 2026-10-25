@@ -1,0 +1,134 @@
+================================================================================
+          PANDUAN LENGKAP TEKNISI JARINGAN, LAB UJIAN & ROUTER
+================================================================================
+
+Folder ini dirancang khusus untuk mempermudah konfigurasi jaringan lokal (LAN),
+pemindaian perangkat, penyelesaian masalah koneksi di lab sekolah dan kantor.
+
+DAFTAR ISI:
+1. Penjelasan Tools Otomatis di Folder Ini
+2. Topologi Standar Lab Komputer Ujian (ANBK / TKA / CBT)
+3. Urutan Crimping Warna Kabel LAN RJ45 (Standar T568B)
+4. Daftar Alamat IP Default & Sandi Router / Modem Populer
+5. Trik Mengatasi "No Internet Access / Unidentified Network"
+
+================================================================================
+1. PENJELASAN TOOLS OTOMATIS DI FOLDER INI
+================================================================================
+- Atur_IP_Address_Static_DHCP.bat:
+  Script 1-klik untuk beralih antara IP Static (Server ANBK 192.168.0.200 /
+  Klien 192.168.0.x) dan mode DHCP Otomatis bawaan pabrik.
+
+- Lihat_Semua_Password_Wifi.bat:
+  Mengekstrak seluruh profil nama SSID Wi-Fi dan kata sandi asli (plaintext)
+  yang pernah terhubung pada laptop ini.
+
+- Scan_IP_Komputer_Lab.bat:
+  Memindai seluruh subnet lokal via ARP table untuk melihat daftar IP dan MAC
+  Address komputer yang sedang aktif di lab.
+
+- Cek_Port_Jaringan_Server.bat:
+  Menguji apakah port web/aplikasi (Port 80, 443, 8088, 8888, 3389, 445)
+  pada Server atau Router dalam kondisi Terbuka (Open) atau Tertutup.
+
+- Aktifkan_Network_Sharing_Folder.bat:
+  Membuka blokir Windows Firewall, mengaktifkan Network Discovery, dan menghidupkan
+  layanan FDResPub agar komputer lab bisa saling melihat dan sharing folder.
+
+- Izinkan_Ping_Masuk_Firewall.bat:
+  Membuka aturan inbound ICMP Ping agar komputer klien dapat di-ping oleh server
+  tanpa balasan "Request timed out".
+
+- Buat_Hotspot_Laptop.bat:
+  Memancarkan jaringan Wi-Fi virtual langsung dari kartu wireless laptop teknisi
+  saat berada di lokasi terpencil tanpa router Wi-Fi.
+
+- Tes_Koneksi_Ping_Ujian.bat:
+  Memantau kestabilan koneksi ping tanpa henti ke gateway, internet, atau server VHD.
+
+- Ganti_DNS_Cepat.bat:
+  Mengganti DNS adapter ke Google DNS (8.8.8.8), Cloudflare (1.1.1.1), atau DHCP.
+
+================================================================================
+2. TOPOLOGI STANDAR LAB KOMPUTER UJIAN (ANBK / TKA / CBT)
+================================================================================
+Di seluruh sekolah di Indonesia, standar jaringan simulasi dan ujian semi-online:
+
+A. Komputer Server (Proktor):
+   - Menggunakan 2 Kartu LAN (NIC 1 ke Internet, NIC 2 ke Switch Klien).
+   - IP NIC 2 (Ke Klien) : 192.168.0.200 (WAJIB STATIS)
+   - Subnet Mask         : 255.255.255.0
+   - Gateway             : Kosongkan (Jangan diisi)
+   - DNS                 : Kosongkan
+   - IP VHD VirtualBox   : 192.168.0.200 (Mode Bridged ke NIC 2)
+
+B. Komputer Klien (Siswa):
+   - IP Address          : 192.168.0.2 s/d 192.168.0.199 (Bebas urut)
+   - Subnet Mask         : 255.255.255.0
+   - Gateway             : 192.168.0.200
+   - DNS                 : 192.168.0.200
+
+* CATATAN VITAL:
+  Komputer klien dilarang memakai IP 192.168.0.200 karena akan IP Conflict
+  dengan Server VHD proktor!
+
+================================================================================
+3. URUTAN CRIMPING WARNA KABEL LAN RJ45 (STANDAR T568B)
+================================================================================
+Standar kabel lurus (Straight Through) untuk menghubungkan PC ke Switch / Router:
+Pegang konektor RJ45 dengan posisi PIN tembaga menghadap ke atas/mata Anda,
+dan klip pengunci menghadap ke bawah:
+
+Pin 1 : PUTIH - ORANGE
+Pin 2 : ORANGE
+Pin 3 : PUTIH - HIJAU
+Pin 4 : BIRU
+Pin 5 : PUTIH - BIRU
+Pin 6 : HIJAU
+Pin 7 : PUTIH - COKLAT
+Pin 8 : COKLAT
+
+(Kedua ujung kabel A dan B diurutkan dengan susunan yang sama persis).
+
+================================================================================
+4. DAFTAR ALAMAT IP DEFAULT & SANDI ROUTER POPULER
+================================================================================
+1. MIKROTIK (RouterBoard / RB750 / Hex / Hap Lite):
+   - IP Default : 192.168.88.1
+   - Username   : admin
+   - Password   : (Kosong / Tanpa Password)
+   - Akses via  : Software Winbox atau Web Browser
+
+2. TP-LINK (WR840N / Archer / Access Point):
+   - IP Default : 192.168.0.1 atau 192.168.1.1 (tplinkwifi.net)
+   - Username   : admin
+   - Password   : admin (atau dibuat saat login pertama kali)
+
+3. INDIHOME / FIBERHOME / ZTE (F609 / F670L):
+   - IP Default : 192.168.1.1
+   - User Biasa : user / user1234
+   - Superadmin : admin / Telkomdso123 atau admin / %0#%0#admin
+
+4. HUAWEI (HG8245A / HG8245H5):
+   - IP Default : 192.168.100.1
+   - Superadmin : telecomadmin / admintelecom
+   - User Biasa : root / admin
+
+5. TENDA (N301 / F3 / AC10):
+   - IP Default : 192.168.0.1 (tendawifi.com)
+   - Password   : (Kosong saat baru buka dus)
+
+================================================================================
+5. TRIK MENGATASI "NO INTERNET / UNIDENTIFIED NETWORK"
+================================================================================
+1. Cek Lampu Indikator Port LAN:
+   - Jika lampu hijau/orange di port RJ45 laptop mati total: kabel putus,
+     konektor longgar, atau port switch di dinding tidak mendapat daya.
+2. Cek IP Conflict:
+   - Jalankan "Scan_IP_Komputer_Lab.bat" untuk memeriksa apakah ada 2 laptop
+     dengan IP yang sama.
+3. Looping Switch:
+   - Jika seluruh lab tiba-tiba koneksinya putus bersamaan dan lampu switch
+     berkedip sangat kencang serentak, cari apakah ada kabel LAN yang kedua
+     ujungnya tidak sengaja dicolok ke switch yang sama (Network Loop)!
+================================================================================

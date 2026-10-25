@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Halaman Tes Cetak Warna & Nozzle Printer</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; margin: 20px; background: #fff; color: #000; }
+  h2 { margin-bottom: 5px; }
+  p { font-size: 13px; color: #444; margin-top: 0; }
+  .color-bar { display: flex; justify-content: center; gap: 15px; margin: 25px auto; max-width: 650px; }
+  .block { width: 140px; height: 90px; border: 1px solid #000; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
+  .black { background: #000000; color: #ffffff; }
+  .cyan { background: #00ffff; color: #000000; }
+  .magenta { background: #ff00ff; color: #ffffff; }
+  .yellow { background: #ffff00; color: #000000; }
+  .grid-box { border: 2px dashed #000; padding: 15px; margin: 20px auto; max-width: 650px; font-size: 12px; }
+  .lines { display: flex; justify-content: space-around; margin-top: 10px; }
+  .btn-print { background: #0284c7; color: #fff; border: none; padding: 12px 25px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-bottom: 20px; }
+  .btn-print:hover { background: #0369a1; }
+  @media print {
+    .btn-print { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="btn-print" onclick="window.print()">[ KLIK DI SINI UNTUK CETAK TES WARNA ]</button>
+
+<h2>HALAMAN UJI COBA WARNA & NOZZLE HEAD PRINTER</h2>
+<p>Teknisi Tool - Uji Kerapatan Tinta Hitam, Cyan, Magenta, dan Yellow</p>
+
+<div class="color-bar">
+  <div class="block black">BLACK<br>(HITAM 100%)</div>
+  <div class="block cyan">CYAN<br>(BIRU 100%)</div>
+  <div class="block magenta">MAGENTA<br>(MERAH 100%)</div>
+  <div class="block yellow">YELLOW<br>(KUNING 100%)</div>
+</div>
+
+<div class="grid-box">
+  <b>PANDUAN PEMERIKSAAN HASIL CETAK:</b>
+  <p>1. Jika warna di atas ada yang bergaris-garis putih / bolong, lakukan <b>Head Cleaning</b> pada driver printer.</p>
+  <p>2. Jika salah satu warna tidak keluar sama sekali, periksa selang infus atau kemungkinan cartridge buntu/masuk angin.</p>
+  <div class="lines">
+    <span>| | | | | | | | | | | | |</span>
+    <span>---------------------------</span>
+    <span>| | | | | | | | | | | | |</span>
+  </div>
+</div>
+
+</body>
+</html>

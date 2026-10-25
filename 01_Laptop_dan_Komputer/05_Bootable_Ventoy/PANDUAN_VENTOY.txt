@@ -1,0 +1,36 @@
+===============================================================================
+PANDUAN RESMI SETUP VENTOY MULTIBOOT - AMUNISI TEKNISI LAPANGAN
+===============================================================================
+
+Ventoy adalah tool open-source terbaik untuk teknisi lapangan untuk membuat 
+Flashdisk Multiboot tanpa perlu format ulang setiap kali ingin menambah file ISO.
+
+Cukup copy file ISO (Windows 10, Windows 11, Linux Ubuntu/Debian, Sergei Strelec, 
+Hiren's BootCD, DLC Boot) langsung ke dalam flashdisk!
+
+LANGKAH INSTALASI VENTOY RESMI:
+1. Unduh paket Ventoy resmi terbaru (ventoy-x.x.xx-windows.zip):
+   https://www.ventoy.net/en/download.html
+   atau melalui GitHub Release resmi:
+   https://github.com/ventoy/Ventoy/releases
+
+2. Ekstrak zip ke folder ini atau jalankan 'Ventoy2Disk.exe'.
+
+3. Colokkan Flashdisk Teknisi (Disarankan 32 GB / 64 GB / 128 GB USB 3.0):
+   - Pilih flashdisk target di dropdown Ventoy2Disk.
+   - Klik [Install].
+   - Catatan: Flashdisk akan diformat 1 kali di awal.
+
+4. Setelah instalasi selesai:
+   - Partisi besar flashdisk akan siap digunakan.
+   - Cukup COPY dan PASTE file .ISO Windows, Linux, atau Rescue Disk ke flashdisk.
+   - Saat booting laptop (F12 / F2 / Esc / F9), pilih flashdisk Ventoy, 
+     menu interaktif pilihan OS akan muncul otomatis.
+
+TIPS TEKNISI LAPANGAN:
+- Buat folder tersendiri di dalam flashdisk seperti:
+  /ISO/Windows/
+  /ISO/Linux/
+  /ISO/Rescue/
+  Ventoy akan otomatis mendeteksi semua file ISO di seluruh subfolder!
+===============================================================================

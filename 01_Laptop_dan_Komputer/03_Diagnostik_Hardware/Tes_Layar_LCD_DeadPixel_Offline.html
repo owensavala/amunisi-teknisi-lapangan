@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penguji Layar LCD & Dead Pixel Offline - Tools Teknisi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+        }
+        #screen {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        #instructions {
+            position: absolute;
+            background: rgba(15, 23, 42, 0.92);
+            color: #f8fafc;
+            padding: 28px 36px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.15);
+            max-width: 540px;
+            text-align: center;
+            pointer-events: auto;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #38bdf8;
+            font-weight: 700;
+        }
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #cbd5e1;
+            margin-bottom: 14px;
+        }
+        .key-badge {
+            display: inline-block;
+            background: #334155;
+            color: #38bdf8;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            border: 1px solid #475569;
+        }
+        .btn-start {
+            margin-top: 10px;
+            background: #0284c7;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-start:hover {
+            background: #0369a1;
+        }
+        #color-name {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: rgba(0,0,0,0.65);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="screen" onclick="nextColor()">
+        <div id="instructions">
+            <h1>PENGUJI LAYAR LCD & DEAD PIXEL</h1>
+            <p>Alat diagnosa offline untuk memeriksa kondisi panel LCD laptop/monitor:</p>
+            <p style="text-align: left; font-size: 13px;">
+                * <b>Dead Pixel:</b> Titik hitam mati yang terlihat pada warna Putih/Terang.<br>
+                * <b>Stuck Pixel:</b> Titik merah/hijau/biru yang menyala terus pada layar Hitam.<br>
+                * <b>Backlight Bleed:</b> Bocornya cahaya putih di sudut bingkai pada layar Hitam.
+            </p>
+            <p>
+                Navigasi: <span class="key-badge">KLIK MOUSE</span> atau <span class="key-badge">SPASI</span> untuk ganti warna.<br>
+                Keluar: <span class="key-badge">ESC</span>
+            </p>
+            <button class="btn-start" onclick="startTest(event)">MULAI UJI LAYAR PENUH</button>
+        </div>
+        <div id="color-name">Hitam (Cek Stuck Pixel & Backlight Bleed)</div>
+    </div>
+
+    <script>
+        const colors = [
+            { bg: '#000000', name: '1/9: Hitam Pekat (Uji Stuck Pixel & Backlight Bleed)' },
+            { bg: '#ffffff', name: '2/9: Putih Bersih (Uji Dead Pixel, Titik Kotor & Noda Layar)' },
+            { bg: '#ff0000', name: '3/9: Merah Murni (Uji Sub-pixel Merah)' },
+            { bg: '#00ff00', name: '4/9: Hijau Murni (Uji Sub-pixel Hijau)' },
+            { bg: '#0000ff', name: '5/9: Biru Murni (Uji Sub-pixel Biru)' },
+            { bg: '#ffff00', name: '6/9: Kuning (Yellow)' },
+            { bg: '#00ffff', name: '7/9: Cyan (Biru Muda)' },
+            { bg: '#ff00ff', name: '8/9: Magenta (Ungu Merah)' },
+            { bg: 'linear-gradient(to right, #000, #fff)', name: '9/9: Gradasi Grayscale (Uji Banding & Kedalaman Warna Panel)' }
+        ];
+
+        let currentIndex = 0;
+        let isTesting = false;
+
+        function startTest(e) {
+            e.stopPropagation();
+            document.getElementById('instructions').style.display = 'none';
+            isTesting = true;
+            
+            // Request Fullscreen
+            const docEl = document.documentElement;
+            if (docEl.requestFullscreen) {
+                docEl.requestFullscreen();
+            } else if (docEl.webkitRequestFullscreen) {
+                docEl.webkitRequestFullscreen();
+            }
+
+            applyColor();
+        }
+
+        function applyColor() {
+            const screen = document.getElementById('screen');
+            const colorName = document.getElementById('color-name');
+            const item = colors[currentIndex];
+
+            if (item.bg.startsWith('linear-gradient')) {
+                screen.style.background = item.bg;
+            } else {
+                screen.style.background = item.bg;
+            }
+
+            colorName.innerText = item.name;
+            colorName.style.opacity = '1';
+            setTimeout(() => {
+                colorName.style.opacity = '0';
+            }, 2500);
+        }
+
+        function nextColor() {
+            if (!isTesting) return;
+            currentIndex = (currentIndex + 1) % colors.length;
+            applyColor();
+        }
+
+        function prevColor() {
+            if (!isTesting) return;
+            currentIndex = (currentIndex - 1 + colors.length) % colors.length;
+            applyColor();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!isTesting) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    startTest(e);
+                }
+                return;
+            }
+            if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                nextColor();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                prevColor();
+            } else if (e.key === 'Escape') {
+                isTesting = false;
+                document.getElementById('instructions').style.display = 'block';
+                document.getElementById('screen').style.background = '#000000';
+                document.getElementById('color-name').style.opacity = '0';
+            }
+        });
+    </script>
+</body>
+</html>

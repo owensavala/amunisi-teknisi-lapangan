@@ -1,0 +1,127 @@
+================================================================================
+          PANDUAN LENGKAP SERVIS DAN RESET PRINTER (EPSON & CANON)
+================================================================================
+
+Folder ini berisi seluruh amunisi otomatisasi dan panduan teknisi untuk menangani
+permasalahan printer di kantor, sekolah, dan percetakan.
+
+DAFTAR ISI:
+1. Penjelasan Tools Otomatis di Folder Ini
+2. Solusi Error Sharing Printer Jaringan (0x0000011b / 0x00000709)
+3. Panduan Reset Bantalan Tinta Epson (Waste Ink Pad Counter)
+4. Panduan Reset Canon Service Mode (Error 5B00 / Bantalan Penuh)
+5. Arti Kode Kedip Lampu (Blinking) Printer Populer
+
+================================================================================
+1. PENJELASAN TOOLS OTOMATIS DI FOLDER INI
+================================================================================
+- Reset_Print_Spooler.bat:
+  Mengatasi dokumen antrian cetak macet (stuck printing) yang menolak dihapus
+  dengan cara membersihkan folder spooler tanpa restart komputer.
+
+- Fix_Sharing_Printer_0x0000011b.bat:
+  Solusi 1-klik untuk mengatasi laptop kantor/lab yang gagal menyambung ke
+  printer sharing jaringan akibat update keamanan Windows RPC.
+
+- Perbaikan_Printer_Offline.bat:
+  Memaksa printer yang berstatus "Offline" menjadi "Online" dan mematikan
+  antrian pause serta bug status SNMP printer jaringan.
+
+- Kirim_Halaman_Tes_Cetak.bat:
+  Mengirim perintah Windows Test Page resmi ke printer mana pun langsung lewat
+  terminal untuk menguji konektivitas fisik tanpa membuka Microsoft Word.
+
+- Bersihkan_Driver_Printer_Lama.bat:
+  Membuka antarmuka manajemen driver inti Windows untuk menghapus paket driver
+  printer lama yang rusak (corrupt) yang memicu spooler sering mati sendiri.
+
+- Cetak_Tes_Warna_Nozzle.html:
+  Halaman tes visual warna CMYK dan garis kerapatan head untuk mendeteksi apakah
+  tinta printer putus-putus atau head mampet. Buka di browser dan klik tombol Cetak.
+
+================================================================================
+2. SOLUSI ERROR SHARING PRINTER (0x0000011b & 0x00000709)
+================================================================================
+Penyebab:
+Update keamanan Windows memblokir protokol RPC lama yang tidak terenkripsi
+antara komputer host printer (server) dan komputer klien.
+
+Langkah Perbaikan:
+1. Jalankan script "Fix_Sharing_Printer_0x0000011b.bat" di Komputer Server
+   (komputer yang dicolok kabel USB printer). Pilih opsi 1 atau 3.
+2. Jalankan script yang sama di Komputer Klien (komputer yang ingin mencetak).
+   Pilih opsi 2 atau 3.
+3. Sambungkan kembali printer via jaringan:
+   - Tekan Windows + R, ketik "\\IP_KOMPUTER_SERVER" (contoh: \\192.168.1.10)
+   - Klik kanan printer yang muncul -> Connect.
+
+================================================================================
+3. PANDUAN RESET EPSON (WASTE INK PAD COUNTER / SERVICE REQUIRED)
+================================================================================
+Gejala:
+Lampu indikator kertas dan tinta berkedip merah bergantian (alternating flash).
+Di layar monitor muncul notifikasi: "A printer's ink pad is at the end of its
+service life. Please contact Epson Support."
+
+Penyebab:
+Chip penampung buangan tinta telah mencapai batas hitungan (100% full) untuk
+mencegah tinta meluber ke meja.
+
+Langkah Reset Menggunakan Adjustment Program (AdjProg):
+1. Pastikan kabel USB printer tercolok langsung ke laptop (jangan via hub/sharing).
+2. Matikan antivirus Windows Defender sementara jika file AdjProg diblokir.
+3. Jalankan AdjProg.exe -> Klik "Select" -> Pilih model printer dan port USB printer.
+4. Klik tombol "Particular adjustment mode".
+5. Pada menu Maintenance, pilih "Waste ink pad counter" -> Klik OK.
+6. Centang kotak "Main pad counter" (dan "Platen pad counter" jika ada).
+7. Klik tombol "Check" untuk membaca persentase titik hitung.
+8. Centang kembali kotaknya, lalu klik tombol "Initialize".
+9. Klik OK saat muncul konfirmasi.
+10. Saat muncul dialog: "Please turn off the printer", MATIKAN tombol power printer.
+11. Klik OK pada monitor, lalu NYALAKAN kembali printer.
+12. Lampu printer akan kembali normal hijau diam!
+
+================================================================================
+4. PANDUAN RESET CANON (ERROR 5B00 / 1700 / SERVICE MODE)
+================================================================================
+Gejala:
+Lampu power dan alarm berkedip bergantian 7 atau 8 kali. Di komputer muncul
+kode error 5B00 (The ink absorber is almost full / full).
+
+Cara Masuk Service Mode Canon (Seri G / MP / IP):
+1. Pastikan kabel USB dan power printer terpasang, posisi printer MATI.
+2. Tekan dan TAHAN tombol RESUME (Stop/Cancel).
+3. Sambil tombol Resume ditahan, tekan dan TAHAN tombol POWER (kedua tombol ditahan).
+4. Lepaskan tombol RESUME (tombol Power TETAP ditahan).
+5. Sambil tombol Power tetap ditahan, tekan tombol RESUME sebanyak 5 KALI berturut-turut.
+   (Lampu indikator akan berganti warna hijau - orange setiap ditekan).
+6. Lepaskan kedua tombol secara bersamaan.
+7. Komputer akan mendeteksi hardware baru ("CanonDevice" di Device Manager).
+8. Buka software "Canon Service Tool" (v3400 / v4905 / v5103):
+   - Pada bagian "Ink Absorber Counter", pilih Absorber: Main.
+   - Pada bagian Counter Value (%), pastikan 0.
+   - Klik tombol "SET".
+9. Printer akan mencetak kode konfirmasi D=000.0.
+10. Matikan printer, lalu hidupkan kembali ke mode normal.
+
+================================================================================
+5. ARTI KODE KEDIP LAMPU (BLINKING) UMUM
+================================================================================
+A. Canon (Lampu Orange / Alarm):
+   - 2x kedip : Kertas habis atau paper jam di area penarik kertas bawah.
+   - 3x kedip : Kertas tersangkut di dalam rol mesin.
+   - 4x kedip : Tinta cartridge habis (Tekan dan tahan tombol Resume 10 detik).
+   - 5x kedip : Cartridge tidak terdeteksi (Kuningan cartridge kotor terkena tinta,
+                bersihkan dengan tisu kering / penghapus pensil).
+   - 7x / 8x kedip : Bantalan tinta penuh (Perlu Service Mode & Reset).
+   - 10x kedip : Cartridge tidak kompatibel.
+
+B. Epson:
+   - Lampu Kertas menyala diam : Kertas habis / ukuran kertas salah.
+   - Lampu Kertas berkedip : Kertas tersangkut (Paper Jam).
+   - Lampu Tinta menyala diam : Tinta habis (Perlu isi ulang botol tinta).
+   - Lampu Tinta & Kertas BERKEDIP BERGANTIAN : Waste ink pad counter habis (Reset).
+   - Lampu Tinta & Kertas BERKEDIP BERSAMAAN CEPAT : Fatal Error!
+     (Kemungkinan: Ada cicak/klip kertas jatuh di dalam rel, atau pita encoder
+      transparan di belakang rumah head kotor terkena cipratan tinta/oli).
+================================================================================
